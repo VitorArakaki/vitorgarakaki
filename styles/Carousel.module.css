@@ -1,0 +1,97 @@
+/* components/Carousel.module.css */
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.carousel:hover {
+
+    cursor: pointer;
+}
+
+/* Slide content */
+/* ====================== */
+.slide {
+    overflow: hidden;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.slideContent {
+    display: flex;
+    align-items: center;
+    border: 1px dotted white;
+    width: 90%;
+    /* Add dotted border */
+    padding: 5px;
+    /* Add padding */
+    max-height: 180px;
+}
+
+.slide img {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    border-right: 2px;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+    border-color: white;
+    border-style: dotted;
+    /* Adjust spacing between image and text */
+}
+
+.texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* ====================== */
+
+/* Texts custom */
+/* ====================== */
+.title {
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: white;
+    padding-bottom: 5px;
+}
+
+.description {
+    font-size: 1vw;
+}
+
+/* ====================== */
+
+/* NEXT AND PREVIOUS BUTTON */
+/* ====================== */
+.prevButton,
+.nextButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.prevButton {
+    left: 0;
+}
+
+.nextButton {
+    right: 0;
+}
+
+/* ====================== */

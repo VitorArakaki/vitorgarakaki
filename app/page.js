@@ -2,12 +2,23 @@ import Image from "next/image";
 import Link from "next/link"
 import styles from "../styles/page.module.css";
 import NavBar from "../components/NavBar";
+import Carousel from "../components/Carousel";
+import BlinkingTitle from "../components/BlinkingTitle";
 
 export default function Home() {
+  const slides = [
+    { image: '/assets/aws-pract.png', title: 'AWS Certified Cloud Practitioner', text: 'O AWS Certified Cloud Practitioner valida a compreensão básica e de alto nível dos serviços, da terminologia e da Nuvem AWS.' },
+    { image: '/assets/data-foundation.png', title: 'Practitioner - D&A Foundation', text: 'Concluir 100% da jornada Fundacional de Dados do Programa de Capacitação em Dados e Analytics, que inclui vídeos, artigos e assessments.' },
+    { image: '/assets/data-engineer2.png', title: 'Professional - Data Engineering', text: 'A pessoa que detém esta badge tem conhecimentos aplicados e teóricos sobre Engenharia de Dados em um nível avançado, sendo capaz de aplicar, entender e avaliar as principais técnicas utilizadas na área para resolução de problemas.' },
+    { image: '/assets/leadership.png', title: 'Practitioner - Leadership D&A', text: 'Concluir 100% da jornada Dados & Analytics para Gestão do Programa de Capacitação em Dados e Analytics, que inclui vídeos, artigos e assessments.' },
+    // Add more slides as needed
+  ];
+
+
   return (
     <main className={styles.main}>
       <NavBar />
-      <div className={styles.profile}>
+      <div id="profileSection" className={styles.profile}>
         <div className={styles.profileImage}>
           <Link href="https://www.linkedin.com/in/vitor-arakaki/?locale=en_US" className={styles.profileImageLink}>
             <Image
@@ -16,7 +27,7 @@ export default function Home() {
               height={0}
               sizes="100vw"
               quality={100}
-              style={{ width: '100vw', height: '100vh', maxHeight: '300px', maxWidth: '300px', objectFit: "contain", backgroundColor: "white", borderStyle: "solid", borderColor: "rgba(250, 121, 0, 1)", borderRadius: "50%", borderWidth: "1px" }} // optional
+              style={{ width: '20vw', height: '20vw', maxHeight: '300px', maxWidth: '300px', objectFit: "contain", backgroundColor: "white", borderStyle: "solid", borderColor: "rgba(250, 121, 0, 1)", borderRadius: "50%", borderWidth: "1px" }} // optional
               alt="Picture of the author"
             />
           </Link>
@@ -107,6 +118,13 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className={styles.hrDivision} />
+      <div id="badgeTitle" className={styles.badgeTitle}>
+        <BlinkingTitle title="Badges" />
+      </div>
+      <div id="badgesSection" className={styles.badgeSlider}>
+        <Carousel slides={slides} />
       </div>
     </main>
   );
