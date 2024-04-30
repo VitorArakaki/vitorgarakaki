@@ -1,0 +1,21 @@
+.imageGallery {
+    display: flex;
+}
+
+.image {
+    width: 4vw;
+    height: 4vw;
+    margin: 5px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    /* Transição suave */
+}
+
+.highlighted {
+    width: 6vw;
+    height: 6vw;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    /* Aumenta o tamanho em 20% quando destacado */
+}

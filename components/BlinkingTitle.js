@@ -3,12 +3,12 @@
 import { useEffect } from 'react';
 import styles from '../styles/BlinkingTitle.module.css'
 
-const BlinkingTitle = ({ title }) => {
+const BlinkingTitle = ({ title, idVar, blinkingItem = "_", blinkInterval = 500 }) => {
     useEffect(() => {
         const interval = setInterval(() => {
-            const underscore = document.getElementById('underscore');
+            const underscore = document.getElementById(idVar);
             underscore.style.visibility = (underscore.style.visibility === 'hidden') ? 'visible' : 'hidden';
-        }, 500); // Adjust the blinking speed as needed (500 milliseconds in this example)
+        }, blinkInterval); // Adjust the blinking speed as needed (500 milliseconds in this example)
 
         return () => clearInterval(interval);
     }, []);
@@ -16,7 +16,7 @@ const BlinkingTitle = ({ title }) => {
     return (
         <div>
             <span id="static-text" className={styles.title}>{title}</span>
-            <span id="underscore" className={styles.blink}>_</span>
+            <span id={idVar} className={styles.blink}>{blinkingItem}</span>
         </div>
     );
 };

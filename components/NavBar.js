@@ -27,6 +27,7 @@ const NavBar = () => {
         <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
             <ul className={styles.list}>
                 <li className={styles.item}><Link href="/" className={styles.navigationLink}>Inicio</Link></li>
+                <li className={styles.item}><Link href="/about" className={styles.navigationLink}>Sobre</Link></li>
                 <li className={styles.item}><Link href="/blog" className={styles.navigationLink}>Blog</Link></li>
                 <li className={styles.item}><Link href="/projects" className={styles.navigationLink}>Projetos</Link></li>
                 <li className={styles.item}><Link href="/videos" className={styles.navigationLink}>Videos</Link></li>

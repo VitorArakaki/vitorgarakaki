@@ -2,8 +2,7 @@
 
 .carousel {
     position: relative;
-    width: 100%;
-    max-width: 800px;
+    width: 65vw;
     margin: 0 auto;
 }
 
@@ -16,7 +15,7 @@
 /* ====================== */
 .slide {
     overflow: hidden;
-    height: max-content;
+    height: 15vw;
     display: flex;
     align-items: center;
     width: 100%;
@@ -35,15 +34,9 @@
 }
 
 .slide img {
-    width: 150px;
-    height: 150px;
+    width: 12vw;
+    height: 12vw;
     margin-right: 10px;
-    border-right: 2px;
-    border-top: 0;
-    border-left: 0;
-    border-bottom: 0;
-    border-color: white;
-    border-style: dotted;
     /* Adjust spacing between image and text */
 }
 

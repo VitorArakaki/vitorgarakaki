@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap');
+
 .main {
   display: flex;
   flex-direction: column;
@@ -12,12 +14,12 @@
   height: 0.1vw;
   margin-top: 5vw;
   margin-bottom: 5vw;
-  border-top: #ffffff;
-  border-width: 1px;
-  border-style: dashed;
+  border-top: 1px dashed #ffffff;
+  /* Adicionando o tipo de borda */
   border-spacing: 1vw;
   border-radius: 50%;
 }
+
 
 /* PROFILE */
 /* ====================== */
@@ -82,14 +84,11 @@
 /* ====================== */
 .badgeSlider {
   width: 100vw;
-  height: 5vw;
-  max-height: 50px;
+  height: 15vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5vw;
-  margin-bottom: 5vw;
 }
 
 .badgeTitle {
@@ -97,6 +96,74 @@
   padding-left: 15%;
   padding-right: 15%;
   margin-bottom: 2vw;
+}
+
+/* ====================== */
+
+/* About */
+/* ====================== */
+.about {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-top: 5vw;
+  margin-bottom: 2vw;
+}
+
+.aboutTitle {
+  width: 100%;
+  margin-bottom: 2vw;
+}
+
+/* ====================== */
+
+/* Contact */
+/* ====================== */
+.contact {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-top: 5vw;
+  margin-bottom: 2vw;
+}
+
+.contact {
+  width: 100%;
+  margin-bottom: 2vw;
+}
+
+.imageGallery {
+  height: 6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ====================== */
+
+/* Footer */
+/* ====================== */
+.footer {
+  height: 5vw;
+  width: 100vw;
+  display: flex;
+  padding-left: 15%;
+  padding-right: 15%;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.developer {
+  font-family: "Press Start 2P", system-ui;
+  font-size: 0.7vw;
 }
 
 /* ====================== */
