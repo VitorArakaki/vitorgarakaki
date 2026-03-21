@@ -42,16 +42,29 @@ export default function Home() {
       <div id="profileSection" className={styles.profile}>
         <div className={styles.profileImage}>
           <Link href="https://www.linkedin.com/in/vitor-arakaki/?locale=en_US" className={styles.profileImageLink}>
-            <Image
-              priority
-              src="/assets/eu.png"
-              width={0}
-              height={0}
-              sizes="100vw"
-              quality={100}
-              style={{ width: '20vw', height: '20vw', maxHeight: '300px', maxWidth: '300px', objectFit: "contain", backgroundColor: "white", borderStyle: "solid", borderColor: "rgba(250, 121, 0, 1)", borderRadius: "50%", borderWidth: "1px" }} // optional
-              alt="Picture of the author"
-            />
+            <div className={styles.flipFront}>
+              <Image
+                priority
+                src="/assets/eu.png"
+                width={0}
+                height={0}
+                sizes="100vw"
+                quality={100}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                alt="Picture of the author"
+              />
+            </div>
+            <div className={styles.flipBack}>
+              <Image
+                src="/assets/logo/logo.png"
+                width={0}
+                height={0}
+                sizes="100vw"
+                quality={100}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                alt="Logo"
+              />
+            </div>
           </Link>
         </div>
         <div className={styles.profileBio}>
@@ -66,7 +79,7 @@ export default function Home() {
 
             {codes.map((code) => (
               <div key={code.id + code.description}>
-                <Link key={code.id + code.link} href={code.link} className={styles.profileImageLink}>
+                <Link key={code.id + code.link} href={code.link} className={styles.programLanguagesIcon}>
                   <Image
                     key={code.id + code.src}
                     src={code.src}
@@ -105,7 +118,7 @@ export default function Home() {
           <ImageGallery images={contactsImages} />
         </div>
       </div>
-      <div className={styles.hrDivision} />
+      <div className={styles.hrDivisionBottom} />
       <div id="footerSection" className={styles.footer}>
         <span className={styles.developer}>Developed by Vitor Guirardeli Arakaki</span>
       </div>

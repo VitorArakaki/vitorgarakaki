@@ -1,52 +1,51 @@
 /* components/Carousel.module.css */
 
 .carousel {
-    position: relative;
-    width: 65vw;
-    margin: 0 auto;
+  position: relative;
+  width: 65vw;
+  margin: 0 auto;
 }
 
 .carousel:hover {
-
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Slide content */
 /* ====================== */
 .slide {
-    overflow: hidden;
-    height: 15vw;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
+  overflow: hidden;
+  height: 15vw;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
 }
 
 .slideContent {
-    display: flex;
-    align-items: center;
-    border: 1px dotted white;
-    width: 90%;
-    /* Add dotted border */
-    padding: 5px;
-    /* Add padding */
-    max-height: 180px;
+  display: flex;
+  align-items: center;
+  border: 1px dotted white;
+  width: 90%;
+  /* Add dotted border */
+  padding: 5px;
+  /* Add padding */
+  max-height: 180px;
 }
 
 .slide img {
-    width: 12vw;
-    height: 12vw;
-    margin-right: 10px;
-    /* Adjust spacing between image and text */
+  width: 8vw;
+  height: 8vw;
+  margin-right: 10px;
+  /* Adjust spacing between image and text */
 }
 
 .texts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
 }
 
 /* ====================== */
@@ -54,14 +53,14 @@
 /* Texts custom */
 /* ====================== */
 .title {
-    font-size: 1.2vw;
-    font-weight: bold;
-    color: white;
-    padding-bottom: 5px;
+  font-size: 1.2vw;
+  font-weight: bold;
+  color: white;
+  padding-bottom: 5px;
 }
 
 .description {
-    font-size: 1vw;
+  font-size: 1vw;
 }
 
 /* ====================== */
@@ -70,21 +69,21 @@
 /* ====================== */
 .prevButton,
 .nextButton {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .prevButton {
-    left: 0;
+  left: 0;
 }
 
 .nextButton {
-    right: 0;
+  right: 0;
 }
 
 /* ====================== */
