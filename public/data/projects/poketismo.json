@@ -1,0 +1,13 @@
+{
+  "name": "Poketismo",
+  "version": "1.0.0",
+  "tech": ["React", "Next.js"],
+  "data": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "Descrição",
+      "content": "Ferramenta gratuita de planning poker com todas as funcionalidades."
+    }
+  ]
+}

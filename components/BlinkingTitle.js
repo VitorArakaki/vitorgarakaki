@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import styles from '../styles/BlinkingTitle.module.css'
 
-const BlinkingTitle = ({ title, idVar, blinkingItem = "_", blinkInterval = 500 }) => {
+const BlinkingTitle = ({ title, idVar, blinkingItem = "_", blinkInterval = 500, fontSize = "2.5vw" }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             const underscore = document.getElementById(idVar);
@@ -15,8 +15,8 @@ const BlinkingTitle = ({ title, idVar, blinkingItem = "_", blinkInterval = 500 }
 
     return (
         <div>
-            <span id="static-text" className={styles.title}>{title}</span>
-            <span id={idVar} className={styles.blink}>{blinkingItem}</span>
+            <span id="static-text" className={styles.title} style={{ fontSize }}>{title}</span>
+            <span id={idVar} className={styles.blink} style={{ fontSize }}>{blinkingItem}</span>
         </div>
     );
 };

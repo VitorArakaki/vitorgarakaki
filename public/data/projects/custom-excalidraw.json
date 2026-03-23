@@ -1,0 +1,13 @@
+{
+  "name": "Custom Excalidraw",
+  "version": "1.0.0",
+  "tech": ["React", "Next.js", "Excalidraw"],
+  "data": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "Descrição",
+      "content": "Excalidraw customizado para uso interno, ou seja, implementação customizada onde precisar."
+    }
+  ]
+}

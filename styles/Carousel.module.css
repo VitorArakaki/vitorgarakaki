@@ -7,7 +7,7 @@
 }
 
 .carousel:hover {
-  cursor: pointer;
+  cursor: default;
 }
 
 /* Slide content */
