@@ -8,6 +8,10 @@ export const metadata = {
   description: "Site de portfólio do Vitor Arakakai",
 };
 
+export const viewport = {
+  colorScheme: "only dark",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
