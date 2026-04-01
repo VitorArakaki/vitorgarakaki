@@ -19,6 +19,45 @@ function loadProjectData(jsonFile) {
     return JSON.parse(raw);
 }
 
+async function fetchLinkPreview(url) {
+    try {
+        const res = await fetch(url, {
+            headers: { "User-Agent": "bot" },
+            signal: AbortSignal.timeout(5000),
+        });
+        const html = await res.text();
+
+        const getMetaContent = (property) => {
+            const match = html.match(
+                new RegExp(`<meta[^>]*(?:property|name)=["']${property}["'][^>]*content=["']([^"']*)["']`, "i")
+            ) || html.match(
+                new RegExp(`<meta[^>]*content=["']([^"']*)["'][^>]*(?:property|name)=["']${property}["']`, "i")
+            );
+            return match ? match[1] : null;
+        };
+
+        const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+        const hostname = new URL(url).hostname;
+
+        return {
+            title: getMetaContent("og:title") || titleMatch?.[1] || url,
+            description: getMetaContent("og:description") || getMetaContent("description") || "",
+            siteName: getMetaContent("og:site_name") || hostname,
+            favicon: `https://www.google.com/s2/favicons?domain=${hostname}&sz=32`,
+            url,
+        };
+    } catch {
+        const hostname = new URL(url).hostname;
+        return {
+            title: url,
+            description: "",
+            siteName: hostname,
+            favicon: `https://www.google.com/s2/favicons?domain=${hostname}&sz=32`,
+            url,
+        };
+    }
+}
+
 export function generateStaticParams() {
     const projectItems = loadProjectItems();
     return projectItems.map((item) => ({ slug: item.slug }));
@@ -37,6 +76,13 @@ export default async function ProjectPage({ params }) {
     const sections = projectData?.data
         ? [...projectData.data].sort((a, b) => a.id - b.id)
         : [];
+
+    const linkPreviews = {};
+    for (const section of sections) {
+        if (section.type === "link" && section.content) {
+            linkPreviews[section.id] = await fetchLinkPreview(section.content);
+        }
+    }
 
     return (
         <main className={styles.main}>
@@ -64,8 +110,60 @@ export default async function ProjectPage({ params }) {
                                         />
                                     </div>
                                     <p className={styles.sectionText}>
-                                        {section.content}
+                                        {section.content.split("\n").map((line, i, arr) => (
+                                            <span key={i}>
+                                                {line}
+                                                {i < arr.length - 1 && <br />}
+                                            </span>
+                                        ))}
                                     </p>
+                                </div>
+                            );
+                        }
+                        if (section.type === "link") {
+                            const preview = linkPreviews[section.id];
+                            return (
+                                <div key={section.id} id={`section-${section.id}`} className={styles.section}>
+                                    <div className={styles.sectionTitle}>
+                                        <BlinkingTitle
+                                            title={section.title}
+                                            idVar={`blink-section-${section.id}`}
+                                            blinkingItem=""
+                                            fontSize="1.3vw"
+                                        />
+                                    </div>
+                                    <div className={styles.linkPreviewWrapper}>
+                                        <a
+                                            href={section.content}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.linkPreview}
+                                        >
+                                            <div className={styles.linkPreviewBody}>
+                                                <span className={styles.linkPreviewSite}>
+                                                    {preview?.favicon && (
+                                                        <img
+                                                            src={preview.favicon}
+                                                            alt=""
+                                                            className={styles.linkPreviewFavicon}
+                                                        />
+                                                    )}
+                                                    {preview?.siteName}
+                                                </span>
+                                                <span className={styles.linkPreviewTitle}>
+                                                    {preview?.title}
+                                                </span>
+                                                {preview?.description && (
+                                                    <span className={styles.linkPreviewDescription}>
+                                                        {preview.description}
+                                                    </span>
+                                                )}
+                                                <span className={styles.linkPreviewUrl}>
+                                                    {section.content}
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             );
                         }

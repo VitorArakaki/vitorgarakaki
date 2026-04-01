@@ -43,3 +43,35 @@
 .sidebarLink:hover {
   color: #ffffff;
 }
+
+.scrollTopBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 16px;
+  margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaaaaa;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    opacity 0.3s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrollTopBtnVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scrollTopBtn:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}

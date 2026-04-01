@@ -7,7 +7,25 @@
       "id": 1,
       "type": "text",
       "title": "Descrição",
-      "content": "Excalidraw customizado para uso interno, ou seja, implementação customizada onde precisar."
+      "content": "Realizei o deploy de uma versão buildada e customizada do Excalidraw em Angular JS, para esse projeto realizei a implementação raw do excalidraw usando as libs da própria ferramenta e realizei a implementação de uma forma personalizada para atender às necessidades específicas do projeto."
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "title": "Desafio",
+      "content": "O principal desafio foi adaptar o Excalidraw para funcionar de forma personalizada dentro do projeto Angular JS, garantindo que todas as funcionalidades necessárias estivessem disponíveis e integradas corretamente, acontece que a plataforma em angular já vem sendo desenvolvida e utilizada por uma grande quantidade de usuários internos a pelo menos 2 anos, então qualquer mudança quando a forma de implementação que o excalidraw exige pode causar um impacto negativo na experiência do usuário, então foi necessário realizar uma implementação cuidadosa e estratégica para garantir impacto zero para os usuários finais."
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "title": "Solução",
+      "content": "Para resolver esse desafio, foi necessário realizar uma implementação cuidadosa e estratégica do Excalidraw dentro do projeto Angular JS, garantindo que todas as funcionalidades necessárias estivessem disponíveis e integradas corretamente, sem causar impacto negativo na experiência do usuário, para isso analisando as dependencias e alterações que seriam necessárias para a integração do excalidraw, avaliamos que se fossemos implementar como uma página da própria plataforma causaria impacto no usuário, então mudamos a abordagem.\n\nEm vez de implementar o Excalidraw como uma página da plataforma, optamos por criar uma versão buildada da aplicação, ou seja, realizamos o build local da aplicação em angular em um site que contém apenas o próprio excalidraw, em seguida copiamos todo o build para dentro da página assets/excalidraw-app na nossa plataforma pré existente e então realizamos a integração do excalidraw dentro da plataforma utilizando um iframe, dessa forma conseguimos isolar completamente o excalidraw do restante da plataforma, garantindo que todas as funcionalidades estivessem disponíveis e integradas corretamente, sem causar impacto negativo na experiência do usuário."
+    },
+    {
+      "id": 4,
+      "type": "link",
+      "title": "Link para o projeto",
+      "content": "https://github.com/VitorArakaki/excalidraw-app"
     }
   ]
 }
