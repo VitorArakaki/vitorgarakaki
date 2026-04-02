@@ -80,7 +80,8 @@ export default async function ProjectPage({ params }) {
     const linkPreviews = {};
     for (const section of sections) {
         if (section.type === "link" && section.content) {
-            linkPreviews[section.id] = await fetchLinkPreview(section.content);
+            const urls = section.content.split(",").map((u) => u.trim()).filter(Boolean);
+            linkPreviews[section.id] = await Promise.all(urls.map(fetchLinkPreview));
         }
     }
 
@@ -121,7 +122,7 @@ export default async function ProjectPage({ params }) {
                             );
                         }
                         if (section.type === "link") {
-                            const preview = linkPreviews[section.id];
+                            const previews = linkPreviews[section.id] || [];
                             return (
                                 <div key={section.id} id={`section-${section.id}`} className={styles.section}>
                                     <div className={styles.sectionTitle}>
@@ -133,36 +134,40 @@ export default async function ProjectPage({ params }) {
                                         />
                                     </div>
                                     <div className={styles.linkPreviewWrapper}>
-                                        <a
-                                            href={section.content}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={styles.linkPreview}
-                                        >
-                                            <div className={styles.linkPreviewBody}>
-                                                <span className={styles.linkPreviewSite}>
-                                                    {preview?.favicon && (
-                                                        <img
-                                                            src={preview.favicon}
-                                                            alt=""
-                                                            className={styles.linkPreviewFavicon}
-                                                        />
-                                                    )}
-                                                    {preview?.siteName}
-                                                </span>
-                                                <span className={styles.linkPreviewTitle}>
-                                                    {preview?.title}
-                                                </span>
-                                                {preview?.description && (
-                                                    <span className={styles.linkPreviewDescription}>
-                                                        {preview.description}
-                                                    </span>
-                                                )}
-                                                <span className={styles.linkPreviewUrl}>
-                                                    {section.content}
-                                                </span>
+                                        {previews.map((preview, idx) => (
+                                            <div key={idx} className={styles.linkPreviewItem}>
+                                                <a
+                                                    href={preview.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={styles.linkPreview}
+                                                >
+                                                    <div className={styles.linkPreviewBody}>
+                                                        <span className={styles.linkPreviewSite}>
+                                                            {preview?.favicon && (
+                                                                <img
+                                                                    src={preview.favicon}
+                                                                    alt=""
+                                                                    className={styles.linkPreviewFavicon}
+                                                                />
+                                                            )}
+                                                            {preview?.siteName}
+                                                        </span>
+                                                        <span className={styles.linkPreviewTitle}>
+                                                            {preview?.title}
+                                                        </span>
+                                                        {preview?.description && (
+                                                            <span className={styles.linkPreviewDescription}>
+                                                                {preview.description}
+                                                            </span>
+                                                        )}
+                                                        <span className={styles.linkPreviewUrl}>
+                                                            {preview.url}
+                                                        </span>
+                                                    </div>
+                                                </a>
                                             </div>
-                                        </a>
+                                        ))}
                                     </div>
                                 </div>
                             );

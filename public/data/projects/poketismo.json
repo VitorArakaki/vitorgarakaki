@@ -7,7 +7,25 @@
       "id": 1,
       "type": "text",
       "title": "Descrição",
-      "content": "Ferramenta gratuita de planning poker com todas as funcionalidades."
+      "content": "Poketismo é uma ferramenta gratuita de planning poker com todas as funcionalidades, hoje se encontra fora do ar devido a necessidade de manter alguns recursos pagos em pé, mas se trata de uma ferramenta de planning poker com acesso simultaneo e com um visual agradável."
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "title": "Desafio",
+      "content": "Subir uma ferramenta de planning poker com acesso simultaneo e com um visual agradável, o principal desafio foi a implementação do acesso simultaneo, garantindo que todos os usuários pudessem acessar a ferramenta ao mesmo tempo sem enfrentar problemas de performance ou instabilidade, além disso, também foi necessário garantir que a interface fosse intuitiva e agradável para os usuários, proporcionando uma experiência de uso satisfatória."
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "title": "Solução",
+      "content": "A solução para esse desafio envolveu a utilização de tecnologias e técnicas específicas para garantir o acesso simultaneo e a estabilidade da ferramenta, além disso, também foi necessário investir em um design intuitivo e agradável para os usuários, garantindo que a experiência de uso fosse satisfatória, para isso utilizamos React e Next.js para construir a aplicação, garantindo uma performance otimizada e uma interface agradável, além disso, também implementamos técnicas de otimização de performance e escalabilidade para garantir que a ferramenta pudesse suportar um grande número de usuários simultaneamente sem enfrentar problemas de instabilidade ou lentidão.\n\nAlguns outros itens foram necessário para disponibilizar a funcionalidade desejada, forma eles:\n- Um Socket Server;\n- Neon SQL database;\n- Redis para gerenciamento de sessões e cache"
+    },
+    {
+      "id": 4,
+      "type": "link",
+      "title": "Link para o projeto",
+      "content": "https://github.com/VitorArakaki/poketismo_server,https://github.com/VitorArakaki/poketismofree"
     }
   ]
 }

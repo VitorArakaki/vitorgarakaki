@@ -52,6 +52,12 @@
 }
 
 .linkPreviewWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.linkPreviewItem {
   position: relative;
   max-width: 480px;
   border-radius: 12px;
