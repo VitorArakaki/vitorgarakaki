@@ -1,0 +1,31 @@
+{
+  "name": "Glue Struct Transform lib",
+  "version": "1.0.0",
+  "tech": ["Python"],
+  "data": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "Descrição",
+      "content": "Biblioteca em Python para transformação de estruturas de dados, facilitando conversão de schemas em json para glue struct format."
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "title": "Desafio",
+      "content": "Muitas vezes no dia a dia na engenharia de dados eu e minha equipe nos deparavamos com a necessidade de criar uma tabela manualmente no AWS Glue Catalog e isso sempre fora uma tarefa desastrosa, pois devido à UX não tão boa do serviço era quase certo que nenhuma tabela com um campo STRUCT seria criada com sucesso de primeira, então nosso desafio era, como realizar a criação de uma tabela no AWS Glue Catalog à partir de um json schema ou de um payload de dados de forma correta."
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "title": "Solução",
+      "content": "A solução para esse desafio envolveu a criação de uma biblioteca em Python que automatiza a transformação de schemas em JSON para o formato Glue Struct, garantindo que as tabelas no AWS Glue Catalog fossem criadas corretamente, mesmo com campos STRUCT complexos. A biblioteca foi projetada para ser fácil de usar e integrar em pipelines de dados existentes, proporcionando uma experiência de uso eficiente e confiável, dependendo apenas de ter um json schema formatado corretamente e/ou um payload bem definido. Esse projeto desenvolvi enquanto estagiário então se trata de um projeto básico e que não segue as melhores práticas de desenvolvimento."
+    },
+    {
+      "id": 4,
+      "type": "link",
+      "title": "Links úteis",
+      "content": "https://github.com/VitorArakaki/glue-struct-transform,https://pypi.org/project/glue-struct-transform/"
+    }
+  ]
+}

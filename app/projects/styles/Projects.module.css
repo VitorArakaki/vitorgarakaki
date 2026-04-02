@@ -55,10 +55,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  align-items: stretch;
 }
 
 .linkPreviewItem {
   position: relative;
+  flex: 1 1 0;
+  min-width: 200px;
   max-width: 480px;
   border-radius: 12px;
   padding: 2px;
@@ -75,6 +78,7 @@
 .linkPreview {
   display: flex;
   flex-direction: column;
+  height: 100%;
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;

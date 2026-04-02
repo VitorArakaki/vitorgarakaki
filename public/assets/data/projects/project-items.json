@@ -14,5 +14,13 @@
     "slug": "poketismo",
     "pagePath": "/projects/poketismo",
     "jsonFile": "/data/projects/poketismo.json"
+  },
+  {
+    "image": "/assets/projects/glue-image.png",
+    "title": "Glue Struct Transform lib",
+    "description": "Biblioteca em Python para transformação de estruturas de dados, facilitando conversão de schemas em json para glue struct format.",
+    "slug": "glue-struct-transform",
+    "pagePath": "/projects/glue-struct-transform",
+    "jsonFile": "/data/projects/glue_struct_transform.json"
   }
 ]
