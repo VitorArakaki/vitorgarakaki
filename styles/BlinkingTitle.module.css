@@ -6,10 +6,19 @@
   font-family: "Press Start 2P", system-ui;
   font-weight: 400;
   font-style: normal;
+  font-size: var(--blinking-title-size, 2.5vw);
 }
 
 .blink {
   font-family: "Press Start 2P", system-ui;
   font-weight: 400;
   font-style: thin;
+  font-size: var(--blinking-title-size, 2.5vw);
+}
+
+@media (max-width: 768px) {
+  .title,
+  .blink {
+    font-size: calc(var(--blinking-title-size, 2.5vw) * 2);
+  }
 }

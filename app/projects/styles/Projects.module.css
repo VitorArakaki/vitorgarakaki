@@ -5,7 +5,7 @@
   padding-left: 15%;
   padding-right: 15%;
   margin-bottom: 2vw;
-  margin-top: 5vw;
+  margin-top: 8vw;
 }
 
 .cardShowContainer {
@@ -21,6 +21,24 @@
   padding-left: 15%;
   padding-right: 15%;
   gap: 2vw;
+}
+
+@media (max-width: 768px) {
+  .pageTitle {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 20vw;
+  }
+
+  .docLayout {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .cardShowContainer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 
 .docContent {
@@ -152,4 +170,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .pageTitle {
+    width: 100vw;
+    /* padding-left: 15%; */
+    padding-right: 15%;
+    margin-bottom: 5vw;
+    margin-top: 15vw;
+  }
 }

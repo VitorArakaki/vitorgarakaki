@@ -60,3 +60,9 @@
   font-family: "Poppins", sans-serif;
   line-height: 1.4;
 }
+
+@media (max-width: 768px) {
+  .overlay {
+    opacity: 1;
+  }
+}

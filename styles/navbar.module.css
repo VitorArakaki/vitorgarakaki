@@ -1,39 +1,111 @@
 .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    background-color: #333;
-    color: #fff;
-    z-index: 1000;
-    transition: top 0.3s;
-    /* Add smooth transition for better user experience */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #333;
+  color: #fff;
+  z-index: 1000;
+  transition: top 0.3s;
 }
 
 .list {
-    list-style-type: none;
-    display: flex;
-    gap: 20px;
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
 }
 
 .item {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .navigationLink {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 
 .navigationLink:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .scrolled {
-    top: -50px;
-    /* Adjust this value based on your preference */
+  top: -50px;
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+}
+
+.hamburgerLine {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 3px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.hamburgerLine1Open {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburgerLine2Open {
+  opacity: 0;
+}
+
+.hamburgerLine3Open {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .nav {
+    justify-content: flex-start;
+    padding: 10px 20px;
+    top: 0 !important;
+  }
+
+  .scrolled {
+    top: 0 !important;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    gap: 0;
+  }
+
+  .listOpen {
+    display: flex;
+  }
+
+  .item {
+    width: 100%;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
 }

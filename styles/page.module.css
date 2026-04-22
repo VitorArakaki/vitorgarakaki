@@ -222,3 +222,98 @@
 }
 
 /* ====================== */
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5rem;
+    gap: 1.5rem;
+  }
+
+  .profileImage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profileImageLink {
+    width: 60vw;
+    height: 60vw;
+    max-width: 220px;
+    max-height: 220px;
+  }
+
+  .profileBio {
+    width: 100%;
+    margin-left: 0;
+    max-height: none;
+  }
+
+  .profileName {
+    font-size: 6.5vw;
+  }
+
+  .profileJob {
+    font-size: 4.5vw;
+  }
+
+  .profileCodeLanguages {
+    font-size: 3.5vw;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .badgeSlider {
+    height: auto;
+    min-height: 220px;
+    padding: 0 5%;
+  }
+
+  .badgeTitle {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .about {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 10vw;
+  }
+
+  .contact {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 10vw;
+  }
+
+  .imageGallery {
+    height: auto;
+    min-height: 80px;
+  }
+
+  .footer {
+    height: auto;
+    padding: 20px 5%;
+    justify-content: center;
+  }
+
+  .developer {
+    font-size: 8px;
+    text-align: center;
+  }
+
+  .hrDivision {
+    width: 90vw;
+    margin-top: 10vw;
+    margin-bottom: 10vw;
+  }
+
+  .hrDivisionBottom {
+    width: 90vw;
+    margin-bottom: 6vw;
+  }
+}

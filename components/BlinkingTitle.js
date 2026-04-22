@@ -14,9 +14,9 @@ const BlinkingTitle = ({ title, idVar, blinkingItem = "_", blinkInterval = 500, 
     }, []);
 
     return (
-        <div>
-            <span id="static-text" className={styles.title} style={{ fontSize }}>{title}</span>
-            <span id={idVar} className={styles.blink} style={{ fontSize }}>{blinkingItem}</span>
+        <div style={{ '--blinking-title-size': fontSize }}>
+            <span id="static-text" className={styles.title}>{title}</span>
+            <span id={idVar} className={styles.blink}>{blinkingItem}</span>
         </div>
     );
 };
