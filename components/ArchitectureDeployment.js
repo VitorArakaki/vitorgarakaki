@@ -23,10 +23,10 @@ export default function ArchitectureDeployment() {
     const [step, setStep] = useState(STEPS.UPLOAD);
     const [isDragging, setIsDragging] = useState(false);
     const [fileName, setFileName] = useState("");
-    const [terraform, setTerraform] = useState("");
+    const [files, setFiles] = useState([]); // [{ filename, content }]
+    const [activeFile, setActiveFile] = useState(0);
     const [error, setError] = useState(null);
     const [copied, setCopied] = useState(false);
-    const [activeTab, setActiveTab] = useState("main");
     const fileInputRef = useRef(null);
 
     const processFile = useCallback(async (file) => {
@@ -62,8 +62,8 @@ export default function ArchitectureDeployment() {
                 setStep(STEPS.UPLOAD);
                 return;
             }
-            setTerraform(data.terraform);
-            setActiveTab("main");
+            setFiles(data.files ?? []);
+            setActiveFile(0);
             setStep(STEPS.RESULT);
         } catch {
             setError("Erro de conexão. Verifique sua rede e tente novamente.");
@@ -88,16 +88,26 @@ export default function ArchitectureDeployment() {
     };
 
     const handleCopy = () => {
-        const content = getActiveContent();
+        const content = files[activeFile]?.content ?? "";
         navigator.clipboard.writeText(content).then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         });
     };
 
-    const handleDownload = () => {
-        const content = getActiveContent();
-        const filename = activeTab === "main" ? "main.tf" : `${activeTab}.tf`;
+    const handleDownloadActive = () => {
+        const f = files[activeFile];
+        if (!f) return;
+        triggerDownload(f.filename, f.content);
+    };
+
+    const handleDownloadAll = () => {
+        files.forEach((f, i) => {
+            setTimeout(() => triggerDownload(f.filename, f.content), i * 200);
+        });
+    };
+
+    const triggerDownload = (filename, content) => {
         const blob = new Blob([content], { type: "text/plain" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -107,38 +117,17 @@ export default function ArchitectureDeployment() {
         URL.revokeObjectURL(url);
     };
 
-    const handleDownloadAll = () => {
-        const blob = new Blob([terraform], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "main.tf";
-        a.click();
-        URL.revokeObjectURL(url);
-    };
-
     const handleReset = () => {
         setStep(STEPS.UPLOAD);
         setFileName("");
-        setTerraform("");
+        setFiles([]);
+        setActiveFile(0);
         setError(null);
         setCopied(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
     };
 
-    // Split terraform output into logical sections for tabs
-    const parseSections = (tf) => {
-        const sections = { main: tf };
-        const providerMatch = tf.match(/^(terraform\s*\{[\s\S]*?\}[\s\S]*?^provider\s+"[^"]*"\s*\{[\s\S]*?\})/m);
-        const resourceMatches = [...tf.matchAll(/^resource\s+"([^"]+)"/gm)];
-        const uniqueTypes = [...new Set(resourceMatches.map((m) => m[1]))];
-        if (uniqueTypes.length > 1) {
-            sections["Recursos (" + resourceMatches.length + ")"] = tf;
-        }
-        return sections;
-    };
-
-    const getActiveContent = () => terraform;
+    const currentFile = files[activeFile];
 
     return (
         <div className={styles.container}>
@@ -252,7 +241,9 @@ export default function ArchitectureDeployment() {
                     <div className={styles.resultToolbar}>
                         <div className={styles.resultMeta}>
                             <span className={styles.resultFileName}>{fileName}</span>
-                            <span className={styles.resultBadge}>Terraform HCL</span>
+                            <span className={styles.resultBadge}>
+                                {files.length} {files.length === 1 ? "arquivo" : "arquivos"}
+                            </span>
                         </div>
                         <div className={styles.resultActions}>
                             <button className={styles.actionBtn} onClick={handleCopy}>
@@ -260,10 +251,18 @@ export default function ArchitectureDeployment() {
                             </button>
                             <button
                                 className={`${styles.actionBtn} ${styles.downloadBtn}`}
-                                onClick={handleDownloadAll}
+                                onClick={handleDownloadActive}
                             >
-                                ↓ main.tf
+                                ↓ {currentFile?.filename}
                             </button>
+                            {files.length > 1 && (
+                                <button
+                                    className={`${styles.actionBtn} ${styles.downloadAllBtn}`}
+                                    onClick={handleDownloadAll}
+                                >
+                                    ↓ Todos ({files.length})
+                                </button>
+                            )}
                             <button
                                 className={`${styles.actionBtn} ${styles.resetBtn}`}
                                 onClick={handleReset}
@@ -273,13 +272,27 @@ export default function ArchitectureDeployment() {
                         </div>
                     </div>
 
+                    {files.length > 1 && (
+                        <div className={styles.fileTabs}>
+                            {files.map((f, i) => (
+                                <button
+                                    key={f.filename}
+                                    className={`${styles.fileTab} ${i === activeFile ? styles.fileTabActive : ""}`}
+                                    onClick={() => { setActiveFile(i); setCopied(false); }}
+                                >
+                                    {f.filename}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+
                     <div className={styles.codeWrapper}>
                         <div className={styles.codeHeader}>
-                            <span className={styles.codeFilename}>main.tf</span>
+                            <span className={styles.codeFilename}>{currentFile?.filename}</span>
                             <span className={styles.codeLang}>HCL</span>
                         </div>
                         <pre className={styles.codeBlock}>
-                            <code>{terraform}</code>
+                            <code>{currentFile?.content}</code>
                         </pre>
                     </div>
                 </div>

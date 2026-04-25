@@ -9,7 +9,7 @@
   margin-top: 55px;
   padding: 3rem 2rem 4rem;
   box-sizing: border-box;
-  background: #0a0a1a;
+  background: #171717;
   width: 100%;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .highlight {
-  color: #7c6aff;
+  color: #fa7900;
   font-weight: 500;
 }
 
@@ -91,8 +91,8 @@
 
 .dropzone:hover,
 .dropzoneActive {
-  border-color: rgba(124, 106, 255, 0.6);
-  background: rgba(124, 106, 255, 0.05);
+  border-color: rgba(250, 121, 0, 0.6);
+  background: rgba(250, 121, 0, 0.05);
 }
 
 .uploadIcon {
@@ -103,7 +103,7 @@
 
 .dropzone:hover .uploadIcon,
 .dropzoneActive .uploadIcon {
-  color: #7c6aff;
+  color: #fa7900;
 }
 
 .dropzoneText {
@@ -145,7 +145,7 @@
   font-size: 1.3rem;
   flex-shrink: 0;
   margin-top: 0.1rem;
-  color: #7c6aff;
+  color: #fa7900;
 }
 
 .infoCard strong {
@@ -177,8 +177,8 @@
 .spinnerRing {
   width: 52px;
   height: 52px;
-  border: 3px solid rgba(124, 106, 255, 0.15);
-  border-top-color: #7c6aff;
+  border: 3px solid rgba(250, 121, 0, 0.15);
+  border-top-color: #fa7900;
   border-radius: 50%;
   animation: spin 0.85s linear infinite;
 }
@@ -276,9 +276,9 @@
 .resultBadge {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.7rem;
-  background: rgba(124, 106, 255, 0.15);
-  color: #7c6aff;
-  border: 1px solid rgba(124, 106, 255, 0.3);
+  background: rgba(250, 121, 0, 0.15);
+  color: #fa7900;
+  border: 1px solid rgba(250, 121, 0, 0.3);
   border-radius: 4px;
   padding: 0.15rem 0.5rem;
   letter-spacing: 0.04em;
@@ -312,14 +312,14 @@
 }
 
 .downloadBtn {
-  background: rgba(124, 106, 255, 0.12);
-  color: #a99aff;
-  border-color: rgba(124, 106, 255, 0.3);
+  background: rgba(250, 121, 0, 0.12);
+  color: #ffaa44;
+  border-color: rgba(250, 121, 0, 0.3);
 }
 
 .downloadBtn:hover {
-  background: rgba(124, 106, 255, 0.22);
-  border-color: rgba(124, 106, 255, 0.5);
+  background: rgba(250, 121, 0, 0.22);
+  border-color: rgba(250, 121, 0, 0.5);
 }
 
 .resetBtn {
@@ -332,12 +332,63 @@
   color: #cccccc;
 }
 
+.downloadAllBtn {
+  background: rgba(250, 121, 0, 0.08);
+  color: #f59030;
+  border-color: rgba(250, 121, 0, 0.22);
+}
+
+.downloadAllBtn:hover {
+  background: rgba(250, 121, 0, 0.18);
+  border-color: rgba(250, 121, 0, 0.4);
+}
+
+/* ── File tabs ───────────────────────────────────────────────────────────── */
+.fileTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0;
+}
+
+.fileTab {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: #666666;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+  white-space: nowrap;
+  margin-bottom: -1px;
+}
+
+.fileTab:hover {
+  color: #aaaaaa;
+}
+
+.fileTabActive {
+  color: #ffaa44;
+  border-bottom-color: #fa7900;
+}
+
 /* ── Code block ──────────────────────────────────────────────────────────── */
+.fileTabs + .codeWrapper {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
 .codeWrapper {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   overflow: hidden;
-  background: #0d0d1f;
+  background: #111111;
 }
 
 .codeHeader {

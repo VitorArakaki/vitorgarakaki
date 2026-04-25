@@ -1,55 +1,96 @@
 import { NextResponse } from "next/server";
 
-const TERRAFORM_PROMPT = `You are an expert AWS Solutions Architect and Terraform engineer. Your task is to analyze an architecture diagram (provided as raw file content) and generate complete, production-ready Terraform HCL code for AWS.
+const TERRAFORM_PROMPT = `You are an expert AWS Solutions Architect and Terraform engineer. Your task is to analyze an architecture diagram and generate focused Terraform HCL code for AWS — only for the services that are EXPLICITLY present in the diagram.
 
 DIAGRAM FORMAT:
 - If the content starts with "{" it is an Excalidraw JSON file. Elements are in the "elements" array. Each element has a "type" (rectangle, ellipse, diamond, arrow, text, etc.), a "label" or "text" field, and connections via "boundElements" / arrow endpoints.
 - If the content starts with "<" it is a draw.io XML file. Resources are <mxCell> elements with "value" (label) and "style" attributes. The style may contain shape names like "shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2". Arrows/edges connect resources.
 
-ANALYSIS STEPS:
-1. Identify every distinct AWS resource from shape labels, style names, and text annotations.
-2. Map all connections (arrows/edges) between resources — these represent dependencies, data flow, or network paths.
-3. Infer sensible default configurations for each resource based on AWS best practices.
-4. Determine the required IAM roles, policies, and instance profiles.
+STEP 1 — IDENTIFY SERVICES (STRICT):
+List only the AWS services that are visually present as shapes or icons in the diagram. Do NOT infer, assume, or add supporting infrastructure (like VPC, subnets, internet gateways, route tables, security groups, NAT gateways) unless they are explicitly drawn as their own labeled shapes.
 
-TERRAFORM OUTPUT RULES:
-- Start with a terraform {} block specifying required_providers (aws provider, version ~> 5.0).
-- Add a provider "aws" block with region defaulting to a variable var.aws_region.
-- Declare all variables at the top (aws_region, environment, project_name, and any resource-specific variables).
-- For each identified AWS service generate the appropriate resource block(s):
-  * EC2 → aws_instance, aws_security_group, aws_key_pair (if needed)
-  * S3 → aws_s3_bucket, aws_s3_bucket_versioning, aws_s3_bucket_server_side_encryption_configuration
-  * RDS → aws_db_instance, aws_db_subnet_group, aws_security_group
-  * Lambda → aws_lambda_function, aws_iam_role, aws_iam_role_policy_attachment, aws_cloudwatch_log_group
-  * VPC → aws_vpc, aws_subnet (public/private), aws_internet_gateway, aws_route_table, aws_route_table_association
-  * API Gateway → aws_api_gateway_rest_api, aws_api_gateway_resource, aws_api_gateway_method, aws_api_gateway_integration, aws_api_gateway_deployment
-  * ECS → aws_ecs_cluster, aws_ecs_task_definition, aws_ecs_service, aws_iam_role
-  * SQS → aws_sqs_queue
-  * SNS → aws_sns_topic, aws_sns_topic_subscription
-  * CloudFront → aws_cloudfront_distribution
-  * Route53 → aws_route53_zone, aws_route53_record
-  * ALB/NLB → aws_lb, aws_lb_listener, aws_lb_target_group
-  * ElastiCache → aws_elasticache_cluster, aws_elasticache_subnet_group
-  * EKS → aws_eks_cluster, aws_eks_node_group, aws_iam_role
-- Use references between resources (e.g., aws_vpc.main.id) instead of hardcoded IDs to express dependencies.
-- Add depends_on only where implicit references are insufficient.
-- Create appropriate IAM roles with least-privilege policies for every compute resource (Lambda, EC2, ECS, EKS).
-- Add an outputs block at the end exposing key resource ARNs, IDs, and endpoints.
-- Use descriptive resource names based on labels from the diagram.
-- Add inline comments (# ...) explaining non-obvious configurations.
+STEP 2 — MAP CONNECTIONS:
+For each arrow or edge in the diagram, note which two resources it connects. These become depends_on or resource references in Terraform.
 
-If the diagram is unclear or contains no recognizable AWS resources, generate a minimal but complete example with a VPC, public subnet, security group, and EC2 instance, adding a comment at the top explaining that no specific resources were identified.
+STEP 3 — GENERATE FILES (one .tf file per AWS service type identified):
+- Always generate a "main.tf" with ONLY the terraform {} block, required_providers, provider "aws", and shared variables (aws_region, environment, project_name).
+- For every distinct AWS service found in the diagram, generate one separate file named after the service in snake_case, e.g. "dynamodb.tf", "kinesis.tf", "glue.tf", "lambda.tf", "s3.tf", etc.
+- Each service file contains ONLY the resource blocks for that service plus its IAM role/policy if required for the service to function (e.g. Lambda needs an execution role, ECS needs a task role). Do NOT add other service files.
+- Reference cross-resource dependencies using Terraform references (e.g. aws_dynamodb_table.main.arn).
+- CRITICAL: Do NOT generate a file for any service that is NOT present in the diagram. Do NOT output placeholder files, comment-only files, or files saying "No X resources drawn". If a service is absent, simply do not include its file at all.
 
-Output ONLY the raw Terraform HCL. No markdown, no code fences, no explanations outside of HCL comments.`;
+PER-SERVICE RESOURCE RULES (generate ONLY the minimum needed resources):
+- DynamoDB → aws_dynamodb_table only. Do NOT add DAX, backup policies, or streams unless explicitly drawn.
+- Kinesis Data Streams → aws_kinesis_stream only.
+- Glue / Data Catalog → aws_glue_catalog_database, aws_glue_catalog_table (or aws_glue_crawler if drawn). Do NOT add crawlers, jobs, or connections unless drawn.
+- S3 → aws_s3_bucket only. Add aws_s3_bucket_versioning only if versioning is annotated in the diagram.
+- Lambda → aws_lambda_function + aws_iam_role (execution role) + aws_iam_role_policy_attachment. Do NOT add VPC config unless a VPC is drawn.
+- RDS → aws_db_instance only. Do NOT add aws_db_subnet_group or security groups unless a VPC or subnet is drawn.
+- SQS → aws_sqs_queue only.
+- SNS → aws_sns_topic only. Add aws_sns_topic_subscription only if a subscriber is connected by an arrow.
+- EC2 → aws_instance + aws_security_group (with minimal ingress/egress). Do NOT add VPC, subnets, or route tables unless they are drawn.
+- VPC (only if explicitly drawn) → aws_vpc + aws_subnet for each subnet drawn + aws_internet_gateway if an IGW shape is present.
+- API Gateway → aws_api_gateway_rest_api + aws_api_gateway_deployment only.
+- ECS → aws_ecs_cluster + aws_ecs_task_definition + aws_ecs_service + aws_iam_role.
+- CloudFront → aws_cloudfront_distribution only.
+- ElastiCache → aws_elasticache_cluster only.
 
-function extractTerraform(text) {
-    const trimmed = text.trim();
-    // Strip markdown code fences if Gemini adds them despite instructions
-    const stripped = trimmed
-        .replace(/^```(?:hcl|terraform|tf)?\s*/i, "")
-        .replace(/\s*```\s*$/i, "")
+Add an outputs block in each file exposing the key ARN, ID, or URL for each resource in that file.
+Use descriptive Terraform resource names derived from the diagram labels (lowercase, underscored).
+Add inline comments (# ...) only for non-obvious configurations.
+
+OUTPUT FORMAT — use this exact delimiter between files:
+=== FILE: <filename.tf> ===
+<HCL content>
+
+Example:
+=== FILE: main.tf ===
+terraform {
+  ...
+}
+=== FILE: dynamodb.tf ===
+resource "aws_dynamodb_table" "events" {
+  ...
+}
+
+If the diagram contains no recognizable AWS resources, output only:
+=== FILE: main.tf ===
+# No AWS resources were identified in the diagram.
+terraform {
+  required_providers {
+    aws = { source = "hashicorp/aws", version = "~> 5.0" }
+  }
+}
+variable "aws_region" { default = "us-east-1" }
+provider "aws" { region = var.aws_region }
+
+Output ONLY the delimited files. No markdown, no code fences, no explanations outside of HCL comments.`;
+
+function parseFiles(text) {
+    // Strip any markdown code fences the model may have added
+    const cleaned = text
+        .replace(/^```(?:hcl|terraform|tf)?\s*/gim, "")
+        .replace(/^```\s*$/gim, "")
         .trim();
-    return stripped;
+
+    const delimiter = /^=== FILE: (.+?) ===/m;
+    const parts = cleaned.split(/^=== FILE: .+? ===/m);
+    const headers = [...cleaned.matchAll(/^=== FILE: (.+?) ===/gm)];
+
+    if (headers.length === 0) {
+        // Fallback: model returned plain HCL without delimiters — treat as main.tf
+        return [{ filename: "main.tf", content: cleaned }];
+    }
+
+    return headers.map((match, i) => ({
+        filename: match[1].trim(),
+        content: (parts[i + 1] ?? "").trim(),
+    })).filter((f) => {
+        if (!f.content) return false;
+        // Drop files that contain no actual HCL blocks — only comments / whitespace
+        const withoutComments = f.content.replace(/#[^\n]*/g, "").trim();
+        return withoutComments.length > 0;
+    });
 }
 
 export async function POST(request) {
@@ -134,9 +175,9 @@ export async function POST(request) {
             );
         }
 
-        const terraform = extractTerraform(rawText);
+        const files = parseFiles(rawText);
 
-        return NextResponse.json({ terraform });
+        return NextResponse.json({ files });
     } catch (err) {
         console.error("analyze-architecture error:", err);
         return NextResponse.json(
