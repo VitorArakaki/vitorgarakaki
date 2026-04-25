@@ -5,7 +5,8 @@
     "description": "Excalidraw customizado para uso interno, ou seja, implementação customizada onde precisar.",
     "slug": "custom-excalidraw",
     "pagePath": "/projects/custom-excalidraw",
-    "jsonFile": "/data/projects/custom-excalidraw.json"
+    "jsonFile": "/data/projects/custom-excalidraw.json",
+    "hasDemo": true
   },
   {
     "image": "/assets/projects/poketismo.png",
@@ -22,5 +23,14 @@
     "slug": "glue-struct-transform",
     "pagePath": "/projects/glue-struct-transform",
     "jsonFile": "/data/projects/glue_struct_transform.json"
+  },
+  {
+    "image": "/assets/projects/environment-virtualizer.png",
+    "title": "Environment Virtualizer",
+    "description": "Visualização 3D de ambientes a partir de plantas baixas. Utiliza Google Vision API para interpretar medidas e gera um modelo 3D interativo com Three.js.",
+    "slug": "environment-virtualizer",
+    "pagePath": "/projects/environment-virtualizer",
+    "jsonFile": "/data/projects/environment-virtualizer.json",
+    "hasDemo": true
   }
 ]

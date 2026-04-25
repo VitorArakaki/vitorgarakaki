@@ -1,0 +1,31 @@
+{
+  "name": "Environment Virtualizer",
+  "version": "1.0.0",
+  "tech": [
+    "React",
+    "Next.js",
+    "Google Vision API",
+    "Three.js",
+    "@react-three/fiber"
+  ],
+  "data": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "Descrição",
+      "content": "Ferramenta de visualização 3D de ambientes a partir de plantas baixas. O usuário realiza o upload de uma foto de planta baixa com medidas das paredes, portas e janelas, e o sistema interpreta automaticamente a imagem utilizando a Google Vision API para extrair as dimensões e gerar uma visualização 3D interativa do ambiente."
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "title": "Tecnologias",
+      "content": "O projeto utiliza a Google Cloud Vision API para reconhecimento de texto (OCR) e identificação de objetos na planta baixa. A renderização 3D é feita com Three.js através do @react-three/fiber, que oferece uma interface React para o Three.js, com controles de câmera via OrbitControls do @react-three/drei."
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "title": "Como funciona",
+      "content": "1. O usuário faz upload de uma foto da planta baixa\n2. A imagem é enviada para a Google Vision API que detecta textos (medidas em m, cm, mm) e objetos (portas, janelas)\n3. Os dados extraídos são processados para identificar as dimensões do ambiente\n4. Uma visualização 3D interativa é renderizada com Three.js — é possível rotacionar, dar zoom e explorar o ambiente\n5. Caso a API não esteja configurada, o usuário pode inserir as dimensões manualmente"
+    }
+  ]
+}

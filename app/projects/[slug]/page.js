@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import Link from "next/link";
 import NavBar from "../../../components/NavBar";
 import BlinkingTitle from "../../../components/BlinkingTitle";
 import DocSidebar from "../../../components/DocSidebar";
@@ -95,6 +96,11 @@ export default async function ProjectPage({ params }) {
                     blinkingItem="_"
                     fontSize="2vw"
                 />
+                {project.hasDemo && (
+                    <Link href={`/projects/${slug}/demo`} className={styles.demoButton}>
+                        DEMO
+                    </Link>
+                )}
             </div>
             <div className={styles.docLayout}>
                 <div className={styles.docContent}>

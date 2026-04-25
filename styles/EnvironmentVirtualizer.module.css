@@ -1,0 +1,653 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Press+Start+2P&display=swap");
+
+/* ── Shared ─────────────────────────────────────────────────────────────── */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 55px);
+  margin-top: 55px;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: #0a0a1a;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 620px;
+}
+
+.title {
+  font-family: "Press Start 2P", cursive;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.93rem;
+  color: #aaaaaa;
+  line-height: 1.8;
+}
+
+/* ── Error ───────────────────────────────────────────────────────────────── */
+.errorBanner {
+  background: rgba(220, 53, 69, 0.12);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #ff6b6b;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  max-width: 540px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── Dropzone ────────────────────────────────────────────────────────────── */
+.dropzone {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 3rem 4rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.dropzone:hover,
+.dragging {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.dropzoneIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.dropzoneText {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.dropzoneSubtext {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+  color: #888888;
+  margin-bottom: 0.8rem;
+}
+
+.dropzoneFormats {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.72rem;
+  color: #555555;
+  letter-spacing: 0.05em;
+}
+
+/* ── Processing ──────────────────────────────────────────────────────────── */
+.processingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.processingText {
+  font-family: "Poppins", sans-serif;
+  color: #cccccc;
+  font-size: 0.92rem;
+}
+
+.previewThumb {
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.previewThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+/* ── Manual form ─────────────────────────────────────────────────────────── */
+.manualForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.manualLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+  color: #cccccc;
+}
+
+.manualInput {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.manualInput:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.manualActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.primaryButton {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.65rem;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  flex: 1;
+}
+
+.primaryButton:hover {
+  opacity: 0.85;
+}
+
+.secondaryButton {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.65rem;
+  background: transparent;
+  color: #888888;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.secondaryButton:hover {
+  color: #cccccc;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Result layout ───────────────────────────────────────────────────────── */
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 55px);
+  margin-top: 55px;
+  background: #0a0a1a;
+}
+
+.resultToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.resultInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.resultDims {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  color: #cccccc;
+}
+
+.badge {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+  color: #aaaaaa;
+}
+
+/* ── View preset buttons ─────────────────────────────────────────────────── */
+.viewButtons {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.viewButton {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.5rem;
+  background: transparent;
+  color: #888888;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+  white-space: nowrap;
+}
+
+.viewButton:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.viewButtonActive {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.viewButtonActive:hover {
+  opacity: 0.9;
+  color: #000000;
+}
+
+.resetButton {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.58rem;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.resetButton:hover {
+  opacity: 0.85;
+}
+
+.splitView {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.imagePanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  max-width: 40%;
+}
+
+.scenePanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelLabel {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.7rem;
+  color: #555555;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.originalImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.loadingScene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #555555;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+}
+
+/* ── Import model button (upload screen) ─────────────────────────────────── */
+.importModelButton {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.55rem;
+  color: #666666;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.importModelButton:hover {
+  color: #aaaaaa;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Sidebar toggle button ───────────────────────────────────────────────── */
+.sidebarToggle {
+  font-size: 1rem;
+  background: transparent;
+  color: #888888;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+  flex-shrink: 0;
+}
+
+.sidebarToggle:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.sidebarToggleActive {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.editModeButton {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  background: transparent;
+  color: #aaaaaa;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.editModeButton:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.editModeActive {
+  background: #4488ff;
+  color: #ffffff;
+  border-color: #4488ff;
+}
+
+.wallLengthLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: #aaaaaa;
+}
+
+/* ── Sidebar panel ───────────────────────────────────────────────────────── */
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sidebarTitle {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.55rem;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.sidebarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebarLabel {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.72rem;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Wall select (dropdown, scales to any wall count) ────────────────────── */
+.wallSelect {
+  width: 100%;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.42rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #cccccc;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 0.4rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaa'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  padding-right: 1.5rem;
+}
+
+.wallSelect:focus {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.wallSelect option {
+  background: #1a1a2e;
+  color: #cccccc;
+}
+
+/* ── Wall tabs ────────────────────────────────────────────────────────────── */
+.wallTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.wallTab {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.42rem;
+  background: transparent;
+  color: #666666;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 0.45rem;
+  cursor: pointer;
+  transition:
+    color 0.12s,
+    border-color 0.12s,
+    background 0.12s;
+  white-space: nowrap;
+}
+
+.wallTab:hover {
+  color: #cccccc;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.wallTabActive {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.wallTabActive:hover {
+  opacity: 0.9;
+  color: #000000;
+}
+
+.sidebarHint {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.68rem;
+  color: #666666;
+  margin-bottom: 0.35rem;
+  font-style: italic;
+}
+
+/* ── Color swatches ──────────────────────────────────────────────────────── */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    border-color 0.1s;
+  flex-shrink: 0;
+}
+
+.swatch:hover {
+  transform: scale(1.15);
+}
+
+.swatchActive {
+  border-color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* ── Color picker input ──────────────────────────────────────────────────── */
+.colorPicker {
+  width: 100%;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ── Sidebar action buttons ──────────────────────────────────────────────── */
+.sidebarBtn {
+  display: block;
+  width: 100%;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.52rem;
+  background: transparent;
+  color: #aaaaaa;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 0.4rem;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+  margin-bottom: 0.35rem;
+}
+
+.sidebarBtn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .title {
+    font-size: 0.75rem;
+  }
+
+  .dropzone {
+    padding: 2rem 1.5rem;
+  }
+
+  .splitView {
+    flex-direction: column;
+  }
+
+  .imagePanel {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 100%;
+    max-height: 35%;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: 160px;
+  }
+}
