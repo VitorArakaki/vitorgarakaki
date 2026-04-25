@@ -1,0 +1,38 @@
+{
+  "name": "Architecture Deployment",
+  "version": "1.0.0",
+  "tech": [
+    "React",
+    "Next.js",
+    "Gemini AI",
+    "Terraform",
+    "Excalidraw",
+    "draw.io"
+  ],
+  "data": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "Descrição",
+      "content": "Ferramenta que transforma diagramas de arquitetura em código Terraform funcional para AWS. O usuário importa um diagrama criado no Excalidraw (.excalidraw) ou draw.io (.drawio/.xml) e o sistema interpreta automaticamente os serviços AWS desenhados, as conexões entre eles e gera o código Terraform completo para provisionamento de toda a infraestrutura."
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "title": "Tecnologias",
+      "content": "O projeto utiliza a API do Google Gemini para análise semântica dos diagramas de arquitetura. O modelo interpreta os elementos visuais, identifica serviços AWS (EC2, S3, RDS, Lambda, VPC, IAM, etc.), entende as dependências representadas pelas conexões e gera código HCL (HashiCorp Configuration Language) válido para Terraform. O frontend é construído com React e Next.js."
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "title": "Como funciona",
+      "content": "1. O usuário exporta seu diagrama do Excalidraw (.excalidraw) ou draw.io (.drawio/.xml)\n2. O arquivo é importado na ferramenta via drag & drop ou seleção\n3. O conteúdo do diagrama é enviado ao Gemini AI com um prompt especializado\n4. O modelo identifica todos os serviços AWS, suas configurações e as dependências entre eles\n5. O código Terraform é gerado incluindo: declaração de recursos, IAM roles e policies, variáveis e outputs\n6. O usuário pode copiar o código ou baixar o arquivo main.tf pronto para uso"
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "title": "Recursos suportados",
+      "content": "A ferramenta reconhece os principais serviços AWS: EC2 (instâncias e Auto Scaling), S3 (buckets e políticas), RDS (bancos de dados relacionais), Lambda (funções serverless), VPC (redes e subnets), API Gateway, ECS/EKS (containers), SQS/SNS (mensageria), CloudFront (CDN), Route 53 (DNS), IAM (roles e policies), e outros serviços comuns de arquiteturas cloud."
+    }
+  ]
+}

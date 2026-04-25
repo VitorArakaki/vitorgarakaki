@@ -32,5 +32,14 @@
     "pagePath": "/projects/environment-virtualizer",
     "jsonFile": "/data/projects/environment-virtualizer.json",
     "hasDemo": true
+  },
+  {
+    "image": "/assets/projects/architecture-deployment.png",
+    "title": "Architecture Deployment",
+    "description": "Importe um diagrama de arquitetura do Excalidraw ou draw.io e gere automaticamente o código Terraform completo para provisionamento da infraestrutura AWS, com recursos, dependências e IAM roles.",
+    "slug": "architecture-deployment",
+    "pagePath": "/projects/architecture-deployment",
+    "jsonFile": "/data/projects/architecture-deployment.json",
+    "hasDemo": true
   }
 ]

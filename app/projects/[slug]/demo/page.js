@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import NavBar from "../../../../components/NavBar";
 import ExcalidrawDemo from "../../../../components/ExcalidrawDemo";
 import EnvironmentVirtualizer from "../../../../components/EnvironmentVirtualizer";
+import ArchitectureDeployment from "../../../../components/ArchitectureDeployment";
 import styles from "../../styles/Projects.module.css";
 
 function loadProjectItems() {
@@ -15,6 +16,7 @@ function loadProjectItems() {
 const demoComponents = {
     "custom-excalidraw": ExcalidrawDemo,
     "environment-virtualizer": EnvironmentVirtualizer,
+    "architecture-deployment": ArchitectureDeployment,
 };
 
 export function generateStaticParams() {

@@ -1,0 +1,429 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Press+Start+2P&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ── Container ───────────────────────────────────────────────────────────── */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 55px);
+  margin-top: 55px;
+  padding: 3rem 2rem 4rem;
+  box-sizing: border-box;
+  background: #0a0a1a;
+  width: 100%;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 660px;
+}
+
+.title {
+  font-family: "Press Start 2P", cursive;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.93rem;
+  color: #aaaaaa;
+  line-height: 1.9;
+}
+
+.highlight {
+  color: #7c6aff;
+  font-weight: 500;
+}
+
+/* ── Error ───────────────────────────────────────────────────────────────── */
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+  color: #ff6b6b;
+  padding: 0.75rem 1.4rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  max-width: 560px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.errorIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ── Upload section ──────────────────────────────────────────────────────── */
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 680px;
+}
+
+.dropzone {
+  border: 2px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 3.5rem 4rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.dropzone:hover,
+.dropzoneActive {
+  border-color: rgba(124, 106, 255, 0.6);
+  background: rgba(124, 106, 255, 0.05);
+}
+
+.uploadIcon {
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 1.2rem;
+  transition: color 0.2s;
+}
+
+.dropzone:hover .uploadIcon,
+.dropzoneActive .uploadIcon {
+  color: #7c6aff;
+}
+
+.dropzoneText {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  color: #dddddd;
+  margin-bottom: 0.5rem;
+}
+
+.dropzoneHint {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.78rem;
+  color: #555555;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Info cards ──────────────────────────────────────────────────────────── */
+.infoCards {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.infoCard {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.infoCardIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: #7c6aff;
+}
+
+.infoCard strong {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+}
+
+.infoCard p {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.78rem;
+  color: #777777;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Processing ──────────────────────────────────────────────────────────── */
+.processingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 3rem;
+}
+
+.spinnerRing {
+  width: 52px;
+  height: 52px;
+  border: 3px solid rgba(124, 106, 255, 0.15);
+  border-top-color: #7c6aff;
+  border-radius: 50%;
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.processingTitle {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.75rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+}
+
+.processingMsg {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  color: #888888;
+}
+
+.processingSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.processingStep {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  color: #555555;
+  animation: fadeStep 0.5s ease forwards;
+}
+
+.processingStep:nth-child(1) {
+  animation-delay: 0s;
+}
+.processingStep:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.processingStep:nth-child(3) {
+  animation-delay: 1.2s;
+}
+.processingStep:nth-child(4) {
+  animation-delay: 1.8s;
+}
+.processingStep:nth-child(5) {
+  animation-delay: 2.4s;
+}
+
+@keyframes fadeStep {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Result section ──────────────────────────────────────────────────────── */
+.resultSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 960px;
+  gap: 0;
+}
+
+.resultToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.resultMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.resultFileName {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  color: #aaaaaa;
+}
+
+.resultBadge {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  background: rgba(124, 106, 255, 0.15);
+  color: #7c6aff;
+  border: 1px solid rgba(124, 106, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+.resultActions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.07);
+  color: #dddddd;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+  white-space: nowrap;
+}
+
+.actionBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.downloadBtn {
+  background: rgba(124, 106, 255, 0.12);
+  color: #a99aff;
+  border-color: rgba(124, 106, 255, 0.3);
+}
+
+.downloadBtn:hover {
+  background: rgba(124, 106, 255, 0.22);
+  border-color: rgba(124, 106, 255, 0.5);
+}
+
+.resetBtn {
+  background: rgba(255, 255, 255, 0.04);
+  color: #888888;
+}
+
+.resetBtn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #cccccc;
+}
+
+/* ── Code block ──────────────────────────────────────────────────────────── */
+.codeWrapper {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0d0d1f;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.codeFilename {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #888888;
+}
+
+.codeLang {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  color: #555555;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.codeBlock {
+  margin: 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.codeBlock::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.codeBlock::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.codeBlock::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.codeBlock code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: #c9d1d9;
+  line-height: 1.7;
+  white-space: pre;
+  display: block;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .container {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .title {
+    font-size: 0.72rem;
+  }
+
+  .dropzone {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .infoCards {
+    flex-direction: column;
+  }
+
+  .resultToolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .codeBlock {
+    padding: 1rem;
+  }
+
+  .codeBlock code {
+    font-size: 0.72rem;
+  }
+}
