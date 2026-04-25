@@ -671,7 +671,8 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
     const ghostRef = useRef();
     const ghostRotY = useRef(0);
     const ghostNormal = useRef([0, 0, 1]);
-    const ghostWallCenter = useRef(null); // [x, cy, z] — null until mouse has moved
+    const ghostWallCenter = useRef(null); // [x, cy, z] for frames
+    const ghostFloorPos = useRef(null);   // {x, z} for floor items
     const pendingRef = useRef(pendingFurniture);
     const onPlaceRef = useRef(onPlace);
     useEffect(() => { pendingRef.current = pendingFurniture; }, [pendingFurniture]);
@@ -685,18 +686,21 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
     }, [pendingFurniture, orbitRef]);
 
     // ── Capture-phase click on the canvas DOM element ─────────────────────
-    // Fires BEFORE R3F's event system, so clicking on a wall while in
-    // frame-placement mode places the frame and never selects the wall.
+    // For FRAMES: must intercept before R3F, otherwise the wall mesh steals the click.
+    // For FLOOR items: let R3F handle normally via the floor plane's onClick.
     useEffect(() => {
         if (!pendingFurniture) return;
+        const isFrame = pendingFurniture.id.startsWith("frame_");
+        if (!isFrame) return; // floor items handled by floor plane onClick — no capture needed
+
         const canvas = gl.domElement;
         const handleClick = (e) => {
             const item = pendingRef.current;
             if (!item) return;
             if (!ghostRef.current?.visible) return; // ghost not positioned yet — ignore
-            e.stopPropagation(); // prevent R3F from routing this click to walls
-            const isFrame = item.id.startsWith("frame_");
-            if (isFrame && ghostWallCenter.current) {
+            // Stop R3F from routing this click to any wall
+            e.stopPropagation();
+            if (ghostWallCenter.current) {
                 const [wx, wy, wz] = ghostWallCenter.current;
                 onPlaceRef.current?.({
                     x: wx, y: wy, z: wz,
@@ -705,8 +709,6 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
                     wallNormal: ghostNormal.current,
                 });
             }
-            // Non-frame items: the floor-plane's onClick still works because the
-            // floor plane is in front for those clicks; we don't interfere here.
         };
         canvas.addEventListener("click", handleClick, { capture: true });
         return () => canvas.removeEventListener("click", handleClick, { capture: true });
@@ -716,7 +718,7 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
 
     const [w, h, d] = pendingFurniture.size;
     const isFrame = pendingFurniture.id.startsWith("frame_");
-    const frameDefaultCenterY = 1.3; // eye-level center; adjustable later with Y handle
+    const frameDefaultCenterY = 1.3;
 
     return (
         <>
@@ -731,8 +733,8 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
                 />
             </group>
             {/* Large invisible floor-level plane — tracks cursor for ALL furniture.
-                For frames, the floor XZ point is projected to the nearest wall.
-                Click is only used for non-frame items (frames use the capture handler above). */}
+                Frames project the XZ point onto the nearest wall.
+                Floor items place on click here directly. */}
             <mesh
                 rotation={[-Math.PI / 2, 0, 0]}
                 position={[0, 0.001, 0]}
@@ -752,6 +754,7 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
                         ghostRef.current.position.set(e.point.x, 0, e.point.z);
                         ghostRef.current.rotation.y = 0;
                         ghostRef.current.visible = true;
+                        ghostFloorPos.current = { x: e.point.x, z: e.point.z };
                     }
                 }}
                 onClick={(e) => {
@@ -759,7 +762,7 @@ function FurniturePlacerGhost({ pendingFurniture, onPlace, orbitRef, roomData })
                     if (!isFrame) {
                         onPlace?.({ x: e.point.x, z: e.point.z });
                     }
-                    // frames: handled by the canvas capture listener above
+                    // frames: handled by the canvas capture listener
                 }}
             >
                 <planeGeometry args={[200, 200]} />
