@@ -174,18 +174,49 @@
   padding: 3rem;
 }
 
-.spinnerRing {
-  width: 52px;
-  height: 52px;
-  border: 3px solid rgba(250, 121, 0, 0.15);
-  border-top-color: #fa7900;
-  border-radius: 50%;
-  animation: spin 0.85s linear infinite;
+/* Shimmer skeleton */
+.shimmerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 320px;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+.shimmerBar {
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.12) 40%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.shimmerBar:nth-child(1) {
+  width: 100%;
+}
+.shimmerBar:nth-child(2) {
+  width: 75%;
+}
+.shimmerBar:nth-child(3) {
+  width: 88%;
+}
+.shimmerBar:nth-child(4) {
+  width: 60%;
+}
+.shimmerBar:nth-child(5) {
+  width: 80%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 

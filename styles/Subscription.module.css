@@ -1,0 +1,573 @@
+.page {
+  min-height: 100vh;
+  background-color: #111111;
+  color: #fff;
+}
+
+.loadingWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 96px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Header */
+.header {
+  margin-bottom: 4px;
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.pageSubtitle {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.9rem;
+}
+
+/* Plans grid */
+.plansGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Plan card */
+.planCard {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.planCard:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Featured card */
+.planCardFeatured {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, #1a1a1a 55%);
+}
+
+.planCardFeatured:hover {
+  border-color: rgba(139, 92, 246, 0.65);
+}
+
+/* Featured badge */
+.featuredBadge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Card top */
+.planCardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.planName {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+}
+
+.planPricing {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.planCurrency {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.planAmount {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: #fff;
+}
+
+.planPeriod {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: 4px;
+}
+
+/* Feature list */
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.checkIcon {
+  width: 15px;
+  height: 15px;
+  stroke: #a78bfa;
+  flex-shrink: 0;
+}
+
+/* Project select */
+.projectSelectWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selectLabel {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.select {
+  background-color: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+  appearance: auto;
+}
+
+.select:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.select option {
+  background-color: #1a1a1a;
+}
+
+/* Subscribe buttons */
+.btnSubscribe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #fff;
+  color: #171717;
+  transition: opacity 0.15s;
+  margin-top: auto;
+}
+
+.btnSubscribe:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.btnSubscribe:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btnSubscribeFeatured {
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  color: #fff;
+  border-color: transparent;
+}
+
+.btnSubscribeFeatured:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* ── Current plan card ── */
+.currentPlanCard {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 440px;
+}
+
+.currentPlanHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.activeBadge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4ade80;
+  letter-spacing: 0.3px;
+}
+
+.cancellingBadge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fbbf24;
+  letter-spacing: 0.3px;
+}
+
+.pastDueBadge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f87171;
+  letter-spacing: 0.3px;
+}
+
+.cancellingNote {
+  font-size: 0.82rem;
+  color: #fbbf24;
+  background-color: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+/* Change plan area */
+.changePlanArea {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.btnChangePlan {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.btnChangePlan:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.changePlanForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.changePlanNote {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.changePlanActions {
+  display: flex;
+  gap: 10px;
+}
+
+.btnConfirmChange {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #fff;
+  color: #171717;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.btnConfirmChange:hover:not(:disabled) {
+  opacity: 0.88;
+}
+.btnConfirmChange:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btnReactivate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(74, 222, 128, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s;
+}
+
+.btnReactivate:hover:not(:disabled) {
+  background-color: rgba(74, 222, 128, 0.2);
+}
+.btnReactivate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.currentPlanName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.currentPlanPricing {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.currentPlanCurrency {
+  font-size: 1rem;
+  font-weight: 600;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.currentPlanAmount {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.currentPlanPeriod {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: 2px;
+}
+
+.currentPlanSince {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+/* Cancel area */
+.cancelArea {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.btnCancelTrigger {
+  background: none;
+  border: none;
+  color: rgba(255, 100, 100, 0.65);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+
+.btnCancelTrigger:hover {
+  color: #ff6b6b;
+}
+
+.cancelConfirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cancelConfirmText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.cancelConfirmActions {
+  display: flex;
+  gap: 10px;
+}
+
+.btnBack {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.btnBack:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.btnCancelConfirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s;
+}
+
+.btnCancelConfirm:hover:not(:disabled) {
+  background-color: rgba(239, 68, 68, 0.25);
+}
+
+.btnCancelConfirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Messages */
+.errorMsg {
+  font-size: 0.875rem;
+  color: #ff6b6b;
+  background-color: rgba(255, 80, 80, 0.08);
+  border: 1px solid rgba(255, 80, 80, 0.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 0;
+}
+
+.successMsg {
+  font-size: 0.875rem;
+  color: #4ade80;
+  background-color: rgba(74, 222, 128, 0.07);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 0;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(23, 23, 23, 0.25);
+  border-top-color: #171717;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.btnSubscribeFeatured .spinner,
+.btnCancelConfirm .spinner {
+  border-color: rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .container {
+    padding: 80px 16px 40px;
+  }
+
+  .plansGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .planCardFeatured {
+    margin-top: 12px;
+  }
+
+  .currentPlanCard {
+    max-width: 100%;
+  }
+
+  .cancelConfirmActions {
+    flex-direction: column;
+  }
+
+  .btnBack,
+  .btnCancelConfirm {
+    width: 100%;
+    justify-content: center;
+  }
+}

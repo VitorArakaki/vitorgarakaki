@@ -3,37 +3,292 @@
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 10px 0;
-  background-color: #333;
+  padding: 0 24px;
+  height: 56px;
+  background-color: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   color: #fff;
   z-index: 1000;
-  transition: top 0.3s;
+  transition:
+    top 0.3s,
+    background-color 0.3s;
 }
 
+/* Marca (esquerda) */
+.brand {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.brand:hover {
+  opacity: 0.8;
+}
+
+/* Links centrais */
 .list {
   list-style-type: none;
   display: flex;
-  gap: 20px;
+  gap: 4px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .item {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .navigationLink {
   text-decoration: none;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+  display: block;
 }
 
 .navigationLink:hover {
-  text-decoration: underline;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+}
+
+/* Auth mobile row — hidden on desktop */
+.mobileAuthRow {
+  display: none;
+}
+
+/* Auth (direita) */
+.authSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.navBtnGhost {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background-color 0.15s;
+  white-space: nowrap;
+}
+
+.navBtnGhost:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.navBtnFilled {
+  text-decoration: none;
+  color: #171717;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background-color 0.15s,
+    opacity 0.15s;
+  white-space: nowrap;
+}
+
+.navBtnFilled:hover {
+  background-color: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.88);
+}
+
+.navigationUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+}
+
+.userAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+/* Avatar shimmer skeleton */
+.avatarShimmer {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.13) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* User dropdown */
+.userMenuWrapper {
+  position: relative;
+}
+
+.userMenuTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.userMenuTrigger:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.userMenuName {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userMenuChevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.userMenuChevronOpen {
+  transform: rotate(180deg);
+}
+
+.userDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background-color: rgba(28, 28, 28, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 1100;
+  animation: dropdownIn 0.15s ease;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userDropdownItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 9px 12px;
+  border-radius: 7px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background-color 0.12s,
+    color 0.12s;
+}
+
+.userDropdownItem:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.userDropdownItemDanger {
+  color: rgba(255, 95, 95, 0.85);
+}
+
+.userDropdownItemDanger:hover {
+  background-color: rgba(255, 60, 60, 0.12);
+  color: #ff6b6b;
+}
+
+.userDropdownDivider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin: 4px 6px;
 }
 
 .scrolled {
-  top: -50px;
+  top: -56px;
 }
 
 /* Hamburger button — hidden on desktop */
@@ -74,8 +329,8 @@
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .nav {
-    justify-content: flex-start;
-    padding: 10px 20px;
+    grid-template-columns: auto 1fr auto;
+    padding: 0 16px;
     top: 0 !important;
   }
 
@@ -85,18 +340,27 @@
 
   .hamburger {
     display: flex;
+    order: 3;
+    margin-left: 8px;
   }
 
+  .brand {
+    order: 1;
+  }
+
+  /* Center column hidden on mobile, hamburger takes its place */
   .list {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 100%;
+    top: 56px;
     left: 0;
     width: 100%;
-    background-color: #333;
-    padding: 10px 0;
-    gap: 0;
+    background-color: rgba(25, 25, 25, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 0 16px;
+    gap: 2px;
   }
 
   .listOpen {
@@ -105,7 +369,29 @@
 
   .item {
     width: 100%;
+    padding: 0;
+  }
+
+  .navigationLink {
     padding: 12px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+  }
+
+  /* Auth section hidden on mobile (goes into hamburger menu) */
+  .authSection {
+    display: none;
+  }
+
+  /* Mobile-only auth items (inside the hamburger list) */
+  .mobileAuthRow {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+  }
+
+  .navBtnGhost,
+  .navBtnFilled {
+    flex: 1;
+    text-align: center;
   }
 }

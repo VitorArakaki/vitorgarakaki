@@ -221,7 +221,13 @@ export default function ArchitectureDeployment() {
 
             {step === STEPS.PROCESSING && (
                 <div className={styles.processingBox}>
-                    <div className={styles.spinnerRing} />
+                    <div className={styles.shimmerWrap}>
+                        <div className={styles.shimmerBar} />
+                        <div className={styles.shimmerBar} />
+                        <div className={styles.shimmerBar} />
+                        <div className={styles.shimmerBar} />
+                        <div className={styles.shimmerBar} />
+                    </div>
                     <p className={styles.processingTitle}>Gerando Terraform…</p>
                     <p className={styles.processingMsg}>
                         Analisando diagrama e identificando recursos AWS

@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { checkDemoAccess, incrementDemoUsage, getClientIp } from "../../../lib/demoAccess";
+
+const SLUG = 'environment-virtualizer';
 
 // ── Gemini prompt ─────────────────────────────────────────────────────────
 // Instructs Gemini 1.5 Flash to extract the floor plan geometry as structured JSON.
@@ -47,6 +50,17 @@ function extractJSON(text) {
 
 export async function POST(request) {
     try {
+        const cookieHeader = request.headers.get('cookie') ?? '';
+        const ip = getClientIp(request);
+        const access = await checkDemoAccess({ cookieHeader, ip }, SLUG);
+
+        if (!access.allowed) {
+            return NextResponse.json(
+                { error: 'Você atingiu o limite de 3 usos gratuitos. Assine um plano para continuar.', paywall: true },
+                { status: 403 }
+            );
+        }
+
         const body = await request.json();
         const { imageBase64 } = body;
 
@@ -110,6 +124,9 @@ export async function POST(request) {
                 { status: 502 }
             );
         }
+
+        // Increment usage only after a successful response
+        if (!access.unlimited) await incrementDemoUsage(ip, SLUG);
 
         return NextResponse.json(buildRoomData(parsed));
     } catch {

@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { checkDemoAccess, incrementDemoUsage, getClientIp } from "../../../lib/demoAccess";
+
+const SLUG = 'architecture-deployment';
 
 const TERRAFORM_PROMPT = `You are an expert AWS Solutions Architect and Terraform engineer. Your task is to analyze an architecture diagram and generate focused Terraform HCL code for AWS — only for the services that are EXPLICITLY present in the diagram.
 
@@ -95,6 +98,17 @@ function parseFiles(text) {
 
 export async function POST(request) {
     try {
+        const cookieHeader = request.headers.get('cookie') ?? '';
+        const ip = getClientIp(request);
+        const access = await checkDemoAccess({ cookieHeader, ip }, SLUG);
+
+        if (!access.allowed) {
+            return NextResponse.json(
+                { error: 'Você atingiu o limite de 3 usos gratuitos. Assine um plano para continuar.', paywall: true },
+                { status: 403 }
+            );
+        }
+
         const body = await request.json();
         const { content, format } = body;
 
@@ -176,6 +190,9 @@ export async function POST(request) {
         }
 
         const files = parseFiles(rawText);
+
+        // Increment usage only after a successful response
+        if (!access.unlimited) await incrementDemoUsage(ip, SLUG);
 
         return NextResponse.json({ files });
     } catch (err) {

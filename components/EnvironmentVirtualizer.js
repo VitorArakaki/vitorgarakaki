@@ -29,7 +29,7 @@ const wallCountFromRoomData = (rd) => rd?.walls?.length ?? 4;
 
 const Room3D = dynamic(() => import("./Room3D"), {
     ssr: false,
-    loading: () => <div className={styles.loadingScene}>Carregando cena 3D…</div>,
+    loading: () => <div className={styles.loadingScene}><div className={styles.shimmerScene} /></div>,
 });
 
 const STEPS = { UPLOAD: "upload", PROCESSING: "processing", RESULT: "result", MANUAL: "manual" };
@@ -500,7 +500,11 @@ export default function EnvironmentVirtualizer() {
         return (
             <div className={styles.container}>
                 <div className={styles.processingContainer}>
-                    <div className={styles.spinner} />
+                    <div className={styles.shimmerWrap}>
+                        <div className={styles.shimmerBar} />
+                        <div className={styles.shimmerBar} />
+                        <div className={styles.shimmerBar} />
+                    </div>
                     <p className={styles.processingText}>{processingMsg}</p>
                     {preview && (
                         <div className={styles.previewThumb}>
