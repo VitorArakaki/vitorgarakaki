@@ -5,6 +5,17 @@ import NavBar from "../../components/NavBar";
 import BlinkingTitle from "../../components/BlinkingTitle";
 import CardShow from "../../components/CardShow";
 
+export const metadata = {
+    title: "Projetos",
+    description:
+        "Conheça os projetos de Vitor Arakaki: ferramentas de engenharia de dados, visualização 3D, infraestrutura AWS como código e muito mais.",
+    openGraph: {
+        title: "Projetos | Vitor Arakaki",
+        description:
+            "Conheça os projetos de Vitor Arakaki: ferramentas de engenharia de dados, visualização 3D, infraestrutura AWS como código e muito mais.",
+    },
+};
+
 function loadProjectItems() {
     const filePath = path.join(process.cwd(), "public/assets/data/projects/project-items.json");
     const raw = fs.readFileSync(filePath, "utf-8");

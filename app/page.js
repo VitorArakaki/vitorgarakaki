@@ -7,6 +7,28 @@ import BlinkingTitle from "../components/BlinkingTitle";
 import Card from "../components/Card";
 import ImageGallery from "../components/ImageGallery";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vitorgarakaki.vercel.app";
+
+export const metadata = {
+  alternates: {
+    canonical: siteUrl,
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Vitor Guirardeli Arakaki",
+  url: siteUrl,
+  jobTitle: "Engenheiro de Dados Sênior",
+  birthPlace: "São Bernardo do Campo, SP, Brasil",
+  sameAs: [
+    "https://www.linkedin.com/in/vitor-arakaki",
+    "https://github.com/VitorArakaki",
+  ],
+  knowsAbout: ["Python", "AWS", "Data Engineering", "ETL", "Next.js", "Flutter"],
+};
+
 export default function Home() {
   // Os slides futuramente deverão estar em um banco de dados
   const slides = [
@@ -38,6 +60,10 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <NavBar />
       <div id="profileSection" className={styles.profile}>
         <div className={styles.profileImage}>
@@ -51,7 +77,7 @@ export default function Home() {
                 sizes="100vw"
                 quality={100}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                alt="Picture of the author"
+                alt="Foto de perfil de Vitor Arakaki, Engenheiro de Dados Sênior"
               />
             </div>
             <div className={styles.flipBack}>
@@ -62,7 +88,7 @@ export default function Home() {
                 sizes="100vw"
                 quality={100}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                alt="Logo"
+                alt="Logo de Vitor Arakaki"
               />
             </div>
           </Link>

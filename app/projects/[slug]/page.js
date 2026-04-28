@@ -64,6 +64,37 @@ export function generateStaticParams() {
     return projectItems.map((item) => ({ slug: item.slug }));
 }
 
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const projectItems = loadProjectItems();
+    const project = projectItems.find((item) => item.slug === slug);
+
+    if (!project) {
+        return { title: "Projeto não encontrado" };
+    }
+
+    return {
+        title: project.title,
+        description: project.description,
+        openGraph: {
+            title: `${project.title} | Vitor Arakaki`,
+            description: project.description,
+            images: [
+                {
+                    url: project.image,
+                    alt: project.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${project.title} | Vitor Arakaki`,
+            description: project.description,
+            images: [project.image],
+        },
+    };
+}
+
 export default async function ProjectPage({ params }) {
     const { slug } = await params;
     const projectItems = loadProjectItems();
