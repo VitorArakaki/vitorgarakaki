@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import stripe from '../../../../lib/stripe';
 import sql from '../../../../lib/db';
 
-export const config = { api: { bodyParser: false } };
+// App Router reads the raw body via request.text() — no bodyParser config needed
 
 async function upsertSubscription(stripeSubId, data) {
     const { plan_name, plan_status, external_subscription_id, price, period_end } = data;

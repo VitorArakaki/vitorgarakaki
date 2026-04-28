@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import NavBar from '../../components/NavBar';
@@ -33,6 +33,14 @@ const FULL_FEATURES = [
 ];
 
 export default function SubscriptionPage() {
+    return (
+        <Suspense>
+            <SubscriptionContent />
+        </Suspense>
+    );
+}
+
+function SubscriptionContent() {
     const { user, loading, fetchUser } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
