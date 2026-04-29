@@ -1,39 +1,125 @@
+/* ============================================================
+   PAYWALL — full-page limit reached screen
+   ============================================================ */
 .paywall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  padding: 32px 24px 48px;
+  background: transparent;
+  animation: fadeUp 0.3s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.paywallCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  padding: 48px 24px;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px 32px;
   text-align: center;
-  gap: 24px;
+  backdrop-filter: blur(8px);
 }
 
-.icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
+.iconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Usage pips inside paywall */
+.usageRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.usageLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.2px;
+}
+
+.pips {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.pipUsed {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.pipFree {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 700;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   margin: 0;
+  color: #fff;
 }
 
 .description {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 380px;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.65;
   margin: 0;
+}
+
+.projectName {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+
+.resetNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.25);
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .actions {
@@ -41,37 +127,47 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 300px;
+  margin-top: 4px;
 }
 
 .btnSubscribe {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   background: #fff;
   color: #171717;
   border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
+  border-radius: 12px;
+  padding: 13px 20px;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
   text-decoration: none;
-  transition: opacity 0.15s;
-  text-align: center;
+  transition:
+    opacity 0.15s,
+    transform 0.1s;
+  letter-spacing: 0.1px;
 }
 
 .btnSubscribe:hover {
-  opacity: 0.88;
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btnSubscribe:active {
+  transform: translateY(0);
 }
 
 .btnLogin {
   display: block;
-  background: none;
-  color: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  padding: 11px 20px;
-  font-size: 0.875rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
   font-family: inherit;
@@ -79,41 +175,186 @@
   transition:
     border-color 0.15s,
     color 0.15s;
-  text-align: center;
+  width: 100%;
 }
 
 .btnLogin:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================================
+   FREE USER BANNER — slim strip below navbar
+   ============================================================ */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: 0.815rem;
+  color: rgba(255, 255, 255, 0.65);
+  animation: fadeDown 0.25s ease both;
+}
+
+.bannerWarn {
+  color: #fde68a;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1;
+  min-width: 0;
+}
+
+.bannerText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.bannerSub {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.bannerIconWrap {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerIconGreen {
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  color: #6ee7b7;
+}
+
+.bannerIconBlue {
+  background: rgba(99, 179, 237, 0.12);
+  border: 1px solid rgba(99, 179, 237, 0.2);
+  color: #93c5fd;
+}
+
+.bannerIconYellow {
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.bannerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.bannerLoginBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+  white-space: nowrap;
+}
+
+.bannerLoginBtn:hover {
   border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
 }
 
-/* Usage warning banner */
-.usageBanner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  background: rgba(251, 191, 36, 0.08);
-  border: 1px solid rgba(251, 191, 36, 0.2);
-  border-radius: 8px;
-  font-size: 0.82rem;
-  color: #fbbf24;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.usageBannerIcon {
-  flex-shrink: 0;
-  font-size: 1rem;
-}
-
-.usageBannerLink {
-  color: #fbbf24;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-  background: none;
+.bannerCta {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  color: #171717;
   border: none;
-  font: inherit;
-  padding: 0;
+  border-radius: 7px;
+  padding: 5px 13px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    opacity 0.15s,
+    transform 0.1s;
+  white-space: nowrap;
+}
+
+.bannerCta:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* Pips inside banner (smaller than paywall) */
+.banner .pips {
+  gap: 4px;
+}
+
+.banner .pipUsed {
+  width: 7px;
+  height: 7px;
+  background: rgba(99, 179, 237, 0.6);
+  border-color: rgba(99, 179, 237, 0.3);
+}
+
+.bannerWarn .pipUsed {
+  background: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.banner .pipFree {
+  width: 7px;
+  height: 7px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .paywallCard {
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .banner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .bannerSub {
+    display: none;
+  }
+
+  .bannerText {
+    white-space: normal;
+  }
 }

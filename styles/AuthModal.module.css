@@ -24,7 +24,7 @@
 
 /* Modal card */
 .modal {
-  background-color: #1e1e1e;
+  background-color: rgba(14, 14, 22, 0.98);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 2rem 2rem 2rem;
@@ -140,7 +140,7 @@
 }
 
 .input {
-  background-color: #2a2a2a;
+  background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 0.65rem 0.85rem;
@@ -156,8 +156,8 @@
 }
 
 .input:focus {
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.06);
 }
 
 .input::placeholder {

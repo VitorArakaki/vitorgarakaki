@@ -6,11 +6,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 55px);
-  margin-top: 55px;
+  min-height: 100%;
   padding: 2rem;
   box-sizing: border-box;
-  background: #171717;
 }
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
@@ -31,7 +29,7 @@
 .subtitle {
   font-family: "Poppins", sans-serif;
   font-size: 0.93rem;
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.42);
   line-height: 1.8;
 }
 
@@ -257,9 +255,7 @@
 .resultContainer {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 55px);
-  margin-top: 55px;
-  background: #171717;
+  height: calc(100vh - 56px);
 }
 
 .resultToolbar {
@@ -548,7 +544,7 @@
 }
 
 .wallSelect option {
-  background: #1e1e1e;
+  background: #09090f;
   color: #cccccc;
 }
 

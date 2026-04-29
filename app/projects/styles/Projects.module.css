@@ -69,9 +69,33 @@
   }
 }
 
-.demoContainer {
+/* ── Demo page shell ───────────────────────────────────────── */
+.main {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 90% 45% at 50% -8%, rgba(249, 115, 22, 0.07) 0%, transparent 65%),
+    #09090f;
+  display: flex;
+  flex-direction: column;
+  padding-top: 56px; /* clear fixed navbar */
+}
+
+/* Full-width banner strip anchored below navbar */
+.demoBannerRow {
   width: 100%;
-  margin-top: 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 24px;
+}
+
+.demoBannerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.demoContainer {
+  flex: 1;
+  width: 100%;
 }
 
 .docContent {

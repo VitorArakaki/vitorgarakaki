@@ -27,7 +27,87 @@ function CloseIcon() {
     );
 }
 
-function LoginForm({ onSuccess, onSwitch }) {
+function ForgotPasswordForm({ onBack }) {
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [sent, setSent] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+        try {
+            const res = await fetch('/api/auth/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setSent(true);
+            } else {
+                setError(data.error || 'Erro ao enviar email.');
+            }
+        } catch {
+            setError('Erro de conexão. Tente novamente.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (sent) {
+        return (
+            <>
+                <div className={styles.logoArea}>
+                    <span className={styles.logoMark}>VA</span>
+                </div>
+                <div>
+                    <h2 className={styles.title}>Email enviado</h2>
+                    <p className={styles.subtitle}>Se o email estiver cadastrado, você receberá um link para redefinir sua senha.</p>
+                </div>
+                <button className={styles.button} onClick={onBack}>Voltar para o login</button>
+            </>
+        );
+    }
+
+    return (
+        <>
+            <div className={styles.logoArea}>
+                <span className={styles.logoMark}>VA</span>
+            </div>
+            <div>
+                <h2 className={styles.title}>Esqueci a senha</h2>
+                <p className={styles.subtitle}>Informe seu email e enviaremos um link para redefinir sua senha.</p>
+            </div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                {error && <p className={styles.error}>{error}</p>}
+                <div className={styles.inputGroup}>
+                    <label className={styles.label} htmlFor="modal-forgot-email">Email</label>
+                    <input
+                        id="modal-forgot-email"
+                        className={styles.input}
+                        type="email"
+                        placeholder="seu@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoComplete="email"
+                    />
+                </div>
+                <button className={styles.button} type="submit" disabled={loading}>
+                    {loading && <span className={styles.spinner} />}
+                    {loading ? 'Enviando...' : 'Enviar link'}
+                </button>
+            </form>
+            <p className={styles.footer}>
+                <button className={styles.switchBtn} onClick={onBack}>Voltar para o login</button>
+            </p>
+        </>
+    );
+}
+
+function LoginForm({ onSuccess, onSwitch, onForgot }) {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -89,6 +169,12 @@ function LoginForm({ onSuccess, onSwitch }) {
                             <EyeIcon open={showPassword} />
                         </button>
                     </div>
+                </div>
+                <div style={{ textAlign: 'right', marginTop: '-0.2rem' }}>
+                    <button type="button" className={styles.switchBtn} onClick={onForgot}
+                        style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', borderColor: 'rgba(255,255,255,0.2)' }}>
+                        Esqueci a senha
+                    </button>
                 </div>
                 <button className={styles.button} type="submit" disabled={loading}>
                     {loading && <span className={styles.spinner} />}
@@ -252,15 +338,22 @@ export default function AuthModal() {
                     <CloseIcon />
                 </button>
 
-                {modalView === 'login' ? (
+                {modalView === 'login' && (
                     <LoginForm
                         onSuccess={closeAuthModal}
                         onSwitch={() => setModalView('register')}
+                        onForgot={() => setModalView('forgot-password')}
                     />
-                ) : (
+                )}
+                {modalView === 'register' && (
                     <RegisterForm
                         onSuccess={closeAuthModal}
                         onSwitch={() => setModalView('login')}
+                    />
+                )}
+                {modalView === 'forgot-password' && (
+                    <ForgotPasswordForm
+                        onBack={() => setModalView('login')}
                     />
                 )}
             </div>

@@ -1,10 +1,17 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import dynamic from "next/dynamic";
 import styles from "../styles/ArchitectureDeployment.module.css";
+
+const ArchitectureDrawCanvas = dynamic(
+    () => import("./ArchitectureDrawCanvas"),
+    { ssr: false }
+);
 
 const STEPS = {
     UPLOAD: "upload",
+    DRAW: "draw",
     PROCESSING: "processing",
     RESULT: "result",
 };
@@ -23,11 +30,37 @@ export default function ArchitectureDeployment() {
     const [step, setStep] = useState(STEPS.UPLOAD);
     const [isDragging, setIsDragging] = useState(false);
     const [fileName, setFileName] = useState("");
-    const [files, setFiles] = useState([]); // [{ filename, content }]
+    const [files, setFiles] = useState([]);
     const [activeFile, setActiveFile] = useState(0);
     const [error, setError] = useState(null);
     const [copied, setCopied] = useState(false);
     const fileInputRef = useRef(null);
+
+    // Core API submission — shared by file upload and canvas draw
+    const submitDiagram = useCallback(async (content, format, displayName, fallbackStep = STEPS.UPLOAD) => {
+        setFileName(displayName);
+        setStep(STEPS.PROCESSING);
+
+        try {
+            const res = await fetch("/api/analyze-architecture", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content, format }),
+            });
+            const data = await res.json();
+            if (!res.ok || data.error) {
+                setError(data.error || "Erro ao gerar o código Terraform.");
+                setStep(fallbackStep);
+                return;
+            }
+            setFiles(data.files ?? []);
+            setActiveFile(0);
+            setStep(STEPS.RESULT);
+        } catch {
+            setError("Erro de conexão. Verifique sua rede e tente novamente.");
+            setStep(fallbackStep);
+        }
+    }, []);
 
     const processFile = useCallback(async (file) => {
         setError(null);
@@ -47,29 +80,13 @@ export default function ArchitectureDeployment() {
             return;
         }
 
-        setFileName(file.name);
-        setStep(STEPS.PROCESSING);
+        await submitDiagram(text, format, file.name, STEPS.UPLOAD);
+    }, [submitDiagram]);
 
-        try {
-            const res = await fetch("/api/analyze-architecture", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ content: text, format }),
-            });
-            const data = await res.json();
-            if (!res.ok || data.error) {
-                setError(data.error || "Erro ao gerar o código Terraform.");
-                setStep(STEPS.UPLOAD);
-                return;
-            }
-            setFiles(data.files ?? []);
-            setActiveFile(0);
-            setStep(STEPS.RESULT);
-        } catch {
-            setError("Erro de conexão. Verifique sua rede e tente novamente.");
-            setStep(STEPS.UPLOAD);
-        }
-    }, []);
+    const handleGenerateFromCanvas = useCallback(async (content, displayName) => {
+        setError(null);
+        await submitDiagram(content, "excalidraw", displayName, STEPS.UPLOAD);
+    }, [submitDiagram]);
 
     const onDragOver = (e) => {
         e.preventDefault();
@@ -129,6 +146,16 @@ export default function ArchitectureDeployment() {
 
     const currentFile = files[activeFile];
 
+    // Drawing mode — renders full-bleed canvas outside the padded container
+    if (step === STEPS.DRAW) {
+        return (
+            <ArchitectureDrawCanvas
+                onGenerate={handleGenerateFromCanvas}
+                onBack={() => { setError(null); setStep(STEPS.UPLOAD); }}
+            />
+        );
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -136,8 +163,8 @@ export default function ArchitectureDeployment() {
                 <p className={styles.subtitle}>
                     Importe um diagrama do{" "}
                     <span className={styles.highlight}>Excalidraw</span> ou{" "}
-                    <span className={styles.highlight}>draw.io</span> e gere
-                    automaticamente o código{" "}
+                    <span className={styles.highlight}>draw.io</span> — ou desenhe
+                    aqui mesmo — e gere automaticamente o código{" "}
                     <span className={styles.highlight}>Terraform</span> para
                     provisionar toda a infraestrutura AWS.
                 </p>
@@ -192,6 +219,26 @@ export default function ArchitectureDeployment() {
                             .excalidraw &nbsp;·&nbsp; .drawio &nbsp;·&nbsp; .xml
                         </p>
                     </div>
+
+                    <div className={styles.orDivider}>
+                        <span>ou</span>
+                    </div>
+
+                    <button
+                        className={styles.drawBtn}
+                        onClick={() => setStep(STEPS.DRAW)}
+                    >
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path
+                                d="M13.5 2.5a1.414 1.414 0 0 1 2 2L6 14l-3.5 1 1-3.5L13.5 2.5Z"
+                                stroke="currentColor"
+                                strokeWidth="1.4"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                        Desenhe sua arquitetura aqui
+                    </button>
 
                     <div className={styles.infoCards}>
                         <div className={styles.infoCard}>

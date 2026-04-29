@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background-color: #111111;
+  background-color: transparent;
   color: #fff;
 }
 
@@ -48,7 +48,7 @@
 
 /* Plan card */
 .planCard {
-  background-color: #1a1a1a;
+  background-color: rgba(255, 255, 255, 0.028);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 28px;
@@ -65,12 +65,12 @@
 
 /* Featured card */
 .planCardFeatured {
-  border-color: rgba(139, 92, 246, 0.4);
-  background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, #1a1a1a 55%);
+  border-color: rgba(249, 115, 22, 0.35);
+  background: linear-gradient(180deg, rgba(249, 115, 22, 0.07) 0%, rgba(255, 255, 255, 0.028) 55%);
 }
 
 .planCardFeatured:hover {
-  border-color: rgba(139, 92, 246, 0.65);
+  border-color: rgba(249, 115, 22, 0.6);
 }
 
 /* Featured badge */
@@ -79,7 +79,7 @@
   top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: #f97316;
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
@@ -153,7 +153,7 @@
 .checkIcon {
   width: 15px;
   height: 15px;
-  stroke: #a78bfa;
+  stroke: #f97316;
   flex-shrink: 0;
 }
 
@@ -171,7 +171,7 @@
 }
 
 .select {
-  background-color: #242424;
+  background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   color: #fff;
@@ -190,7 +190,7 @@
 }
 
 .select option {
-  background-color: #1a1a1a;
+  background-color: #09090f;
 }
 
 /* Subscribe buttons */
@@ -223,18 +223,18 @@
 }
 
 .btnSubscribeFeatured {
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: #f97316;
   color: #fff;
   border-color: transparent;
 }
 
 .btnSubscribeFeatured:hover:not(:disabled) {
-  opacity: 0.9;
+  background: rgba(249, 115, 22, 0.88);
 }
 
 /* ── Current plan card ── */
 .currentPlanCard {
-  background-color: #1a1a1a;
+  background-color: rgba(255, 255, 255, 0.028);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 32px;

@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [modalOpen, setModalOpen] = useState(false);
-    const [modalView, setModalView] = useState('login'); // 'login' | 'register'
+    const [modalView, setModalView] = useState('login'); // 'login' | 'register' | 'forgot-password'
 
     const fetchUser = useCallback(async () => {
         try {

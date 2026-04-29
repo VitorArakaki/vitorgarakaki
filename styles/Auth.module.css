@@ -3,12 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #171717;
+  background-color: transparent;
   padding: 2rem 1rem;
 }
 
 .card {
-  background-color: #1e1e1e;
+  background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 2.5rem 2rem;
@@ -80,7 +80,7 @@
 }
 
 .input {
-  background-color: #2a2a2a;
+  background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 0.7rem 0.9rem;
@@ -96,9 +96,10 @@
 }
 
 .input:focus {
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.07);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.06);
 }
+
 
 .input::placeholder {
   color: rgba(255, 255, 255, 0.2);
@@ -235,6 +236,26 @@
 }
 
 .link:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.switchBtn {
+  color: rgba(255, 255, 255, 0.85);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 1px;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.switchBtn:hover {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.7);
 }

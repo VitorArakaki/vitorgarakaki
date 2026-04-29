@@ -2,7 +2,7 @@
 
 .card {
   display: flex;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -82,7 +82,7 @@
 .cardContent .cardButton button {
   padding: 1.3vw 0px;
   width: 100%;
-  background-color: #fa7900;
+  background-color: #f97316;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -92,7 +92,7 @@
 }
 
 .cardContent .cardButton button:hover {
-  background-color: #c35e00;
+  background-color: rgba(249, 115, 22, 0.78);
 }
 
 /* ── Mobile responsive ── */

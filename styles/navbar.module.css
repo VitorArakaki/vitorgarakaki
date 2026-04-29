@@ -8,10 +8,10 @@
   align-items: center;
   padding: 0 24px;
   height: 56px;
-  background-color: rgba(30, 30, 30, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background-color: rgba(9, 9, 15, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   color: #fff;
   z-index: 1000;
   transition:
@@ -224,7 +224,7 @@
   top: calc(100% + 10px);
   right: 0;
   min-width: 180px;
-  background-color: rgba(28, 28, 28, 0.97);
+  background-color: rgba(14, 14, 22, 0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -356,7 +356,7 @@
     top: 56px;
     left: 0;
     width: 100%;
-    background-color: rgba(25, 25, 25, 0.97);
+    background-color: rgba(9, 9, 15, 0.97);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 8px 0 16px;

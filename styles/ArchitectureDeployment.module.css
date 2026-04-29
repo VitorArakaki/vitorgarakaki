@@ -5,11 +5,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 55px);
-  margin-top: 55px;
-  padding: 3rem 2rem 4rem;
+  min-height: 100%;
+  padding: 3.5rem 2rem 5rem;
   box-sizing: border-box;
-  background: #171717;
   width: 100%;
 }
 
@@ -32,12 +30,12 @@
 .subtitle {
   font-family: "Poppins", sans-serif;
   font-size: 0.93rem;
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.42);
   line-height: 1.9;
 }
 
 .highlight {
-  color: #fa7900;
+  color: #f97316;
   font-weight: 500;
 }
 
@@ -69,98 +67,158 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
-  max-width: 680px;
+  max-width: 640px;
+}
+
+/* ── Or divider ──────────────────────────────────────────────────────────── */
+.orDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.18);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.orDivider::before,
+.orDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Draw CTA button ─────────────────────────────────────────────────────── */
+.drawBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 0.88rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  color: rgba(255, 255, 255, 0.58);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.drawBtn:hover {
+  border-color: rgba(249, 115, 22, 0.38);
+  background: rgba(249, 115, 22, 0.045);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .dropzone {
-  border: 2px dashed rgba(255, 255, 255, 0.18);
-  border-radius: 10px;
-  padding: 3.5rem 4rem;
+  border: 1.5px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 3.5rem 3rem;
   cursor: pointer;
   transition:
-    border-color 0.2s,
-    background 0.2s;
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
   outline: none;
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(255, 255, 255, 0.018);
 }
 
 .dropzone:hover,
 .dropzoneActive {
-  border-color: rgba(250, 121, 0, 0.6);
-  background: rgba(250, 121, 0, 0.05);
+  border-color: rgba(249, 115, 22, 0.45);
+  background: rgba(249, 115, 22, 0.04);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.05), inset 0 0 48px rgba(249, 115, 22, 0.025);
 }
 
 .uploadIcon {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.22);
   margin-bottom: 1.2rem;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 
 .dropzone:hover .uploadIcon,
 .dropzoneActive .uploadIcon {
-  color: #fa7900;
+  color: #f97316;
+  transform: translateY(-3px);
 }
 
 .dropzoneText {
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
-  color: #dddddd;
+  font-size: 0.97rem;
+  color: rgba(255, 255, 255, 0.65);
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .dropzoneHint {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.78rem;
-  color: #555555;
-  letter-spacing: 0.08em;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 /* ── Info cards ──────────────────────────────────────────────────────────── */
 .infoCards {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   width: 100%;
   flex-wrap: wrap;
 }
 
 .infoCard {
   flex: 1;
-  min-width: 160px;
+  min-width: 155px;
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 10px;
   padding: 1rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.infoCard:hover {
+  border-color: rgba(249, 115, 22, 0.18);
+  background: rgba(249, 115, 22, 0.03);
 }
 
 .infoCardIcon {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
-  margin-top: 0.1rem;
-  color: #fa7900;
+  margin-top: 0.05rem;
+  color: #f97316;
+  opacity: 0.8;
 }
 
 .infoCard strong {
   display: block;
   font-family: "Poppins", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   font-weight: 600;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.82);
   margin-bottom: 0.3rem;
 }
 
 .infoCard p {
   font-family: "Poppins", sans-serif;
-  font-size: 0.78rem;
-  color: #777777;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.32);
   line-height: 1.5;
   margin: 0;
 }
@@ -171,7 +229,9 @@
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  padding: 3rem;
+  padding: 3.5rem 2rem;
+  width: 100%;
+  max-width: 480px;
 }
 
 /* Shimmer skeleton */
@@ -179,99 +239,75 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .shimmerBar {
-  height: 12px;
-  border-radius: 4px;
+  height: 10px;
+  border-radius: 5px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.12) 40%,
-    rgba(255, 255, 255, 0.04) 100%
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.03) 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.4s ease-in-out infinite;
+  animation: shimmer 1.6s ease-in-out infinite;
 }
 
-.shimmerBar:nth-child(1) {
-  width: 100%;
-}
-.shimmerBar:nth-child(2) {
-  width: 75%;
-}
-.shimmerBar:nth-child(3) {
-  width: 88%;
-}
-.shimmerBar:nth-child(4) {
-  width: 60%;
-}
-.shimmerBar:nth-child(5) {
-  width: 80%;
-}
+.shimmerBar:nth-child(1) { width: 100%; }
+.shimmerBar:nth-child(2) { width: 72%; }
+.shimmerBar:nth-child(3) { width: 88%; }
+.shimmerBar:nth-child(4) { width: 55%; }
+.shimmerBar:nth-child(5) { width: 80%; }
 
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .processingTitle {
   font-family: "Press Start 2P", cursive;
-  font-size: 0.75rem;
-  color: #ffffff;
-  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.06em;
+  margin-top: 0.5rem;
 }
 
 .processingMsg {
   font-family: "Poppins", sans-serif;
-  font-size: 0.88rem;
-  color: #888888;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.28);
 }
 
 .processingSteps {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 260px;
 }
 
 .processingStep {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.8rem;
-  color: #555555;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  color: rgba(249, 115, 22, 0.55);
   animation: fadeStep 0.5s ease forwards;
+  opacity: 0;
 }
 
-.processingStep:nth-child(1) {
-  animation-delay: 0s;
-}
-.processingStep:nth-child(2) {
-  animation-delay: 0.6s;
-}
-.processingStep:nth-child(3) {
-  animation-delay: 1.2s;
-}
-.processingStep:nth-child(4) {
-  animation-delay: 1.8s;
-}
-.processingStep:nth-child(5) {
-  animation-delay: 2.4s;
-}
+.processingStep:nth-child(1) { animation-delay: 0s; }
+.processingStep:nth-child(2) { animation-delay: 0.6s; }
+.processingStep:nth-child(3) { animation-delay: 1.2s; }
+.processingStep:nth-child(4) { animation-delay: 1.8s; }
+.processingStep:nth-child(5) { animation-delay: 2.4s; }
 
 @keyframes fadeStep {
-  from {
-    opacity: 0;
-    transform: translateX(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ── Result section ──────────────────────────────────────────────────────── */
@@ -299,20 +335,20 @@
 }
 
 .resultFileName {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.88rem;
-  color: #aaaaaa;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .resultBadge {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.7rem;
-  background: rgba(250, 121, 0, 0.15);
-  color: #fa7900;
-  border: 1px solid rgba(250, 121, 0, 0.3);
-  border-radius: 4px;
-  padding: 0.15rem 0.5rem;
-  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+  border: 1px solid rgba(249, 115, 22, 0.22);
+  border-radius: 5px;
+  padding: 0.15rem 0.6rem;
+  letter-spacing: 0.05em;
 }
 
 .resultActions {
@@ -323,55 +359,61 @@
 
 .actionBtn {
   font-family: "Poppins", sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.07);
-  color: #dddddd;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 5px;
-  padding: 0.45rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.42rem 0.9rem;
   cursor: pointer;
   transition:
     background 0.15s,
-    border-color 0.15s;
+    border-color 0.15s,
+    color 0.15s;
   white-space: nowrap;
 }
 
 .actionBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .downloadBtn {
-  background: rgba(250, 121, 0, 0.12);
-  color: #ffaa44;
-  border-color: rgba(250, 121, 0, 0.3);
+  background: rgba(249, 115, 22, 0.1);
+  color: rgba(249, 150, 80, 0.88);
+  border-color: rgba(249, 115, 22, 0.2);
 }
 
 .downloadBtn:hover {
-  background: rgba(250, 121, 0, 0.22);
-  border-color: rgba(250, 121, 0, 0.5);
+  background: rgba(249, 115, 22, 0.18);
+  border-color: rgba(249, 115, 22, 0.38);
+  color: #f97316;
 }
 
 .resetBtn {
-  background: rgba(255, 255, 255, 0.04);
-  color: #888888;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .resetBtn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: #cccccc;
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.13);
 }
 
 .downloadAllBtn {
-  background: rgba(250, 121, 0, 0.08);
-  color: #f59030;
-  border-color: rgba(250, 121, 0, 0.22);
+  background: rgba(249, 115, 22, 0.07);
+  color: rgba(249, 140, 60, 0.75);
+  border-color: rgba(249, 115, 22, 0.15);
 }
 
 .downloadAllBtn:hover {
-  background: rgba(250, 121, 0, 0.18);
-  border-color: rgba(250, 121, 0, 0.4);
+  background: rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.32);
+  color: #f97316;
 }
 
 /* ── File tabs ───────────────────────────────────────────────────────────── */
@@ -379,33 +421,39 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   margin-bottom: 0;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
 }
 
 .fileTab {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.75rem;
-  color: #666666;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 0.55rem 1rem;
+  padding: 0.6rem 1.1rem;
   cursor: pointer;
   transition:
     color 0.15s,
-    border-color 0.15s;
+    border-color 0.15s,
+    background 0.15s;
   white-space: nowrap;
   margin-bottom: -1px;
 }
 
 .fileTab:hover {
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .fileTabActive {
-  color: #ffaa44;
-  border-bottom-color: #fa7900;
+  color: #f97316;
+  border-bottom-color: #f97316;
+  background: rgba(249, 115, 22, 0.04);
 }
 
 /* ── Code block ──────────────────────────────────────────────────────────── */
@@ -416,10 +464,10 @@
 }
 
 .codeWrapper {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
   overflow: hidden;
-  background: #111111;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .codeHeader {
@@ -427,21 +475,21 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.55rem 1.2rem;
-  background: rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .codeFilename {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.78rem;
-  color: #888888;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.32);
 }
 
 .codeLang {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.68rem;
-  color: #555555;
-  letter-spacing: 0.06em;
+  font-size: 0.65rem;
+  color: rgba(249, 115, 22, 0.55);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

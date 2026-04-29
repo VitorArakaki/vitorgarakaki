@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background-color: #111111;
+  background-color: transparent;
   color: #fff;
 }
 
@@ -40,7 +40,7 @@
 
 /* Card section */
 .card {
-  background-color: #1a1a1a;
+  background-color: rgba(255, 255, 255, 0.028);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 28px 28px 24px;
@@ -95,7 +95,7 @@
 }
 
 .input {
-  background-color: #242424;
+  background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 0.65rem 0.85rem;
@@ -111,8 +111,8 @@
 }
 
 .input:focus {
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.06);
 }
 
 .input::placeholder {
