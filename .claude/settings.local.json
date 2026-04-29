@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/main/libraries.json\" -o \"c:/Users/viara/vitorgarakaki/public/assets/libraries/_catalog.json\")",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o c:/Users/viara/vitorgarakaki/public/assets/libraries/childishgirl.excalidrawlib https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/main/libraries/childishgirl/aws-architecture-icons.excalidrawlib)",
+      "Bash(curl -s -o c:/Users/viara/vitorgarakaki/public/assets/libraries/serverless-v2.excalidrawlib https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/main/libraries/stojanovic/aws-serverless-icons-v2.excalidrawlib)",
+      "Bash(curl -s -o c:/Users/viara/vitorgarakaki/public/assets/libraries/cloud.excalidrawlib https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/main/libraries/cloud/cloud.excalidrawlib)",
+      "Bash(node -e 'const d=JSON.parse\\(require\\('\\\\''fs'\\\\''\\).readFileSync\\('\\\\''__TRACKED_VAR__'\\\\'','\\\\''utf8'\\\\''\\)\\); const v=d.version; const items=\\(d.libraryItems||d.library||[]\\); console.log\\('\\\\''v'\\\\''+v, items.length+'\\\\''items'\\\\'', Object.keys\\(d\\).join\\('\\\\'','\\\\''\\)\\)')",
+      "Bash(echo \"exit: $?\")",
+      "Bash(gzip -k \"c:/Users/viara/vitorgarakaki/public/assets/libraries/aws-icons.excalidrawlib\")"
     ]
   }
 }

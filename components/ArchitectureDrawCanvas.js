@@ -15,6 +15,8 @@ const Excalidraw = dynamic(
 
 export default function ArchitectureDrawCanvas({ onGenerate, onBack }) {
     const [excalidrawAPI, setExcalidrawAPI] = useState(null);
+    const [libraryStatus, setLibraryStatus] = useState("loading"); // "loading" | "ready" | "error"
+    const [libraryCount, setLibraryCount] = useState(0);
 
     // Load bundled AWS icon library once the Excalidraw API is ready
     useEffect(() => {
@@ -30,9 +32,13 @@ export default function ArchitectureDrawCanvas({ onGenerate, onBack }) {
                         merge: true,
                         openLibraryMenu: false,
                     });
+                    setLibraryCount(libraryItems.length);
+                    setLibraryStatus("ready");
+                } else {
+                    setLibraryStatus("error");
                 }
             })
-            .catch(() => {}); // silent — canvas works fine without pre-loaded icons
+            .catch(() => setLibraryStatus("error"));
     }, [excalidrawAPI]);
 
     const handleGenerate = () => {
@@ -73,9 +79,22 @@ export default function ArchitectureDrawCanvas({ onGenerate, onBack }) {
                     Voltar
                 </button>
 
-                <span className={styles.hint}>
-                    Adicione formas e labels para os serviços AWS, use setas para as conexões
-                </span>
+                <div className={styles.hintArea}>
+                    <span className={styles.hint}>
+                        Formas + labels AWS → setas para conexões → Gerar Terraform
+                    </span>
+                    {libraryStatus === "loading" && (
+                        <span className={styles.libraryBadgeLoading}>
+                            <span className={styles.dot} />
+                            ícones AWS…
+                        </span>
+                    )}
+                    {libraryStatus === "ready" && (
+                        <span className={styles.libraryBadgeReady}>
+                            ✓ {libraryCount} ícones AWS
+                        </span>
+                    )}
+                </div>
 
                 <button className={styles.generateBtn} onClick={handleGenerate}>
                     Gerar Terraform
