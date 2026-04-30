@@ -95,31 +95,33 @@ export default function Home() {
         </div>
         <div className={styles.profileBio}>
           <span className={styles.profileName}>
-            Vitor Guirardeli Arakaki 🇧🇷
+            Vitor Arakaki 🇧🇷
           </span>
           <span className={styles.profileJob}>
             Engenheiro de Dados Sênior
           </span>
           <div className={styles.profileCodeLanguages}>
-            <span>Linguagens de programação:</span>
-
+            <span>Stack:</span>
             {codes.map((code) => (
-              <div key={code.id + code.description}>
-                <Link key={code.id + code.link} href={code.link} className={styles.programLanguagesIcon}>
-                  <Image
-                    key={code.id + code.src}
-                    src={code.src}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    quality={100}
-                    style={{ width: '30px', height: '30px', maxHeight: '300px', maxWidth: '300px', objectFit: "contain", backgroundColor: "white", borderStyle: "solid", borderColor: "transparent", borderRadius: "5%", borderWidth: "1px", backgroundColor: 'transparent', marginLeft: '0.5vw' }} // optional
-                    alt={code.alt}
-                    title={code.description}
-                  />
-                </Link>
-              </div>
+              <Link key={code.id} href={code.link} title={code.description} aria-label={code.alt}>
+                <Image
+                  src={code.src}
+                  width={26}
+                  height={26}
+                  quality={90}
+                  className={styles.codeIcon}
+                  alt={code.alt}
+                />
+              </Link>
             ))}
+          </div>
+          <div className={styles.profileCta}>
+            <Link href="/projects" className={styles.ctaBtnPrimary}>
+              Ver projetos →
+            </Link>
+            <Link href="/demos" className={styles.ctaBtnSecondary}>
+              ⚡ Demos ao vivo
+            </Link>
           </div>
         </div>
       </div>

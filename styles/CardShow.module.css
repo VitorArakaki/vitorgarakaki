@@ -5,64 +5,164 @@
   width: 100%;
 }
 
+/* ── Card shell ──────────────────────────────────────────────────────────── */
 .card {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 4 / 3;
   cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Card image ──────────────────────────────────────────────────────────── */
 .cardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 20px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  height: 100%;
-}
-
-.card:hover .overlay {
-  opacity: 1;
+  transition: transform 0.35s ease;
 }
 
 .card:hover .cardImage {
   transform: scale(1.05);
 }
 
-.title {
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 6px;
+/* ── Always-visible demo badge (top-right corner) ────────────────────────── */
+.demoBadge {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 20px;
+  background: rgba(249, 115, 22, 0.18);
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  color: #f97316;
   font-family: "Poppins", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.15s;
+}
+
+.demoBadge:hover {
+  background: rgba(249, 115, 22, 0.3);
+  border-color: rgba(249, 115, 22, 0.7);
+  transform: scale(1.04);
+}
+
+/* ── Hover overlay ───────────────────────────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+/* Stretched transparent link — makes the whole card clickable → project page */
+.cardLink {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ── Overlay content ─────────────────────────────────────────────────────── */
+.overlayBody {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0;
+}
+
+.title {
+  display: block;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.3;
 }
 
 .description {
-  color: #cccccc;
-  font-size: 0.85rem;
+  display: block;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
   font-weight: 400;
   font-family: "Poppins", sans-serif;
-  line-height: 1.4;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* ── Demo CTA inside overlay ─────────────────────────────────────────────── */
+.demoLink {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: #f97316;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s;
+  align-self: flex-start;
+}
+
+.demoLink:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.demoLink:active {
+  transform: translateY(0);
+}
+
+/* ── Mobile — overlay always visible ─────────────────────────────────────── */
 @media (max-width: 768px) {
   .overlay {
     opacity: 1;
+  }
+
+  .demoBadge {
+    font-size: 0.65rem;
+    padding: 3px 8px 3px 7px;
   }
 }

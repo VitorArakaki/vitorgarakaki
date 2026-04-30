@@ -31,7 +31,8 @@
     "slug": "environment-virtualizer",
     "pagePath": "/projects/environment-virtualizer",
     "jsonFile": "/data/projects/environment-virtualizer.json",
-    "hasDemo": true
+    "hasDemo": true,
+    "isAiDemo": true
   },
   {
     "image": "/assets/projects/architecture-deployment.png",
@@ -40,6 +41,7 @@
     "slug": "architecture-deployment",
     "pagePath": "/projects/architecture-deployment",
     "jsonFile": "/data/projects/architecture-deployment.json",
-    "hasDemo": true
+    "hasDemo": true,
+    "isAiDemo": true
   }
 ]

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { checkDemoAccess, incrementDemoUsage, getClientIp } from "../../../lib/demoAccess";
+import { callGemini } from "../../../lib/gemini";
 
 const SLUG = 'environment-virtualizer';
 
@@ -85,37 +86,30 @@ export async function POST(request) {
 
         const mimeType = detectMimeType(imageBase64);
 
-        const geminiRes = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${encodeURIComponent(apiKey)}`,
+        const geminiResult = await callGemini(
+            apiKey,
             {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            parts: [
-                                { text: GEMINI_PROMPT },
-                                { inline_data: { mime_type: mimeType, data: imageBase64 } },
-                            ],
-                        },
-                    ],
-                    generationConfig: {
-                        temperature: 0.1,
-                        maxOutputTokens: 2000,
+                contents: [
+                    {
+                        parts: [
+                            { text: GEMINI_PROMPT },
+                            { inline_data: { mime_type: mimeType, data: imageBase64 } },
+                        ],
                     },
-                }),
-                signal: AbortSignal.timeout(30000),
-            }
+                ],
+                generationConfig: {
+                    temperature: 0.1,
+                    maxOutputTokens: 2000,
+                },
+            },
+            { timeout: 30_000 }
         );
 
-        if (!geminiRes.ok) {
-            const errData = await geminiRes.json().catch(() => ({}));
-            const msg = errData?.error?.message ?? "Erro na Gemini API.";
-            return NextResponse.json({ error: msg }, { status: 502 });
+        if (!geminiResult.ok) {
+            return NextResponse.json({ error: geminiResult.error }, { status: 502 });
         }
 
-        const geminiData = await geminiRes.json();
-        const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+        const rawText = geminiResult.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
         const parsed = extractJSON(rawText);
 
         if (!parsed) {

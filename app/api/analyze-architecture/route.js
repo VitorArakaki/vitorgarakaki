@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { checkDemoAccess, incrementDemoUsage, getClientIp } from "../../../lib/demoAccess";
+import { callGemini } from "../../../lib/gemini";
 
 const SLUG = 'architecture-deployment';
 
@@ -76,7 +77,6 @@ function parseFiles(text) {
         .replace(/^```\s*$/gim, "")
         .trim();
 
-    const delimiter = /^=== FILE: (.+?) ===/m;
     const parts = cleaned.split(/^=== FILE: .+? ===/m);
     const headers = [...cleaned.matchAll(/^=== FILE: (.+?) ===/gm)];
 
@@ -147,40 +147,31 @@ export async function POST(request) {
 
         const userMessage = `DIAGRAM FORMAT: ${format.toUpperCase()}\n\nDIAGRAM CONTENT:\n${content}`;
 
-        const geminiRes = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${encodeURIComponent(apiKey)}`,
+        const geminiResult = await callGemini(
+            apiKey,
             {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            parts: [
-                                { text: TERRAFORM_PROMPT },
-                                { text: userMessage },
-                            ],
-                        },
-                    ],
-                    generationConfig: {
-                        temperature: 0.2,
-                        maxOutputTokens: 8192,
+                contents: [
+                    {
+                        parts: [
+                            { text: TERRAFORM_PROMPT },
+                            { text: userMessage },
+                        ],
                     },
-                }),
-            }
+                ],
+                generationConfig: {
+                    temperature: 0.2,
+                    maxOutputTokens: 8192,
+                },
+            },
+            { timeout: 60_000 }
         );
 
-        if (!geminiRes.ok) {
-            const errText = await geminiRes.text();
-            console.error("Gemini API error:", geminiRes.status, errText);
-            return NextResponse.json(
-                { error: "Erro ao chamar a API do Gemini. Verifique sua chave e tente novamente." },
-                { status: 502 }
-            );
+        if (!geminiResult.ok) {
+            return NextResponse.json({ error: geminiResult.error }, { status: 502 });
         }
 
-        const geminiData = await geminiRes.json();
         const rawText =
-            geminiData?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+            geminiResult.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
 
         if (!rawText) {
             return NextResponse.json(

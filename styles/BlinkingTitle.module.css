@@ -19,6 +19,6 @@
 @media (max-width: 768px) {
   .title,
   .blink {
-    font-size: calc(var(--blinking-title-size, 2.5vw) * 2);
+    font-size: max(var(--blinking-title-size, 2.5vw), 1.15rem);
   }
 }

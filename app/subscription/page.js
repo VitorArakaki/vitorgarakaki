@@ -75,10 +75,11 @@ function SubscriptionContent() {
         fetch('/assets/data/projects/project-items.json')
             .then(r => r.json())
             .then(data => {
-                setProjects(data);
-                if (data.length > 0) {
-                    setSelectedProject(data[0].slug);
-                    setSelectedChangeProject(data[0].slug);
+                const aiProjects = data.filter(p => p.isAiDemo);
+                setProjects(aiProjects);
+                if (aiProjects.length > 0) {
+                    setSelectedProject(aiProjects[0].slug);
+                    setSelectedChangeProject(aiProjects[0].slug);
                 }
             })
             .catch(() => { });

@@ -64,6 +64,24 @@
   text-decoration: none;
 }
 
+.navigationLinkActive {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.07);
+  position: relative;
+}
+
+.navigationLinkActive::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  border-radius: 99px;
+  background: #f97316;
+}
+
 /* Auth mobile row — hidden on desktop */
 .mobileAuthRow {
   display: none;
@@ -285,6 +303,163 @@
   height: 1px;
   background-color: rgba(255, 255, 255, 0.08);
   margin: 4px 6px;
+}
+
+/* ── Demos dropdown (visible only on demo pages) ─────────────────────────── */
+.demosWrapper {
+  position: relative;
+}
+
+.demosTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 8px;
+  border-radius: 7px;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  color: rgba(249, 115, 22, 0.9);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.demosTrigger:hover,
+.demosTriggerOpen {
+  background: rgba(249, 115, 22, 0.16);
+  border-color: rgba(249, 115, 22, 0.5);
+  color: #f97316;
+}
+
+.demosChevron {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.demosChevronOpen {
+  transform: rotate(180deg);
+}
+
+.demosDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background-color: rgba(14, 14, 22, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  z-index: 1100;
+  animation: dropdownIn 0.15s ease;
+}
+
+.demosDropdownLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.22);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 2px 8px 6px;
+  margin: 0;
+}
+
+.demosItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 9px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
+}
+
+.demosItem:not(.demosItemActive):hover {
+  background: rgba(249, 115, 22, 0.08);
+  border-color: rgba(249, 115, 22, 0.2);
+}
+
+.demosItemActive {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.07);
+  cursor: default;
+}
+
+.demosThumb {
+  width: 48px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.12s;
+}
+
+.demosItemActive .demosThumb {
+  opacity: 0.35;
+}
+
+.demosItem:not(.demosItemActive):hover .demosThumb {
+  opacity: 0.95;
+}
+
+.demosMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.demosName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.12s;
+}
+
+.demosItemActive .demosName {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.demosItem:not(.demosItemActive):hover .demosName {
+  color: #fff;
+}
+
+.demosStatus {
+  font-size: 0.65rem;
+  color: rgba(249, 115, 22, 0.55);
+}
+
+.demosOpen {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(249, 115, 22, 0.6);
+  transition: color 0.12s;
+}
+
+.demosItem:not(.demosItemActive):hover .demosOpen {
+  color: #f97316;
 }
 
 .scrolled {

@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap");
+
+/* ── Page shell ──────────────────────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  padding-top: 56px;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% -5%, rgba(249, 115, 22, 0.07) 0%, transparent 65%),
+    #09090f;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero {
+  padding: clamp(3.5rem, 7vw, 6rem) 15% clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #f97316;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
+}
+
+.heroEyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: #f97316;
+  border-radius: 99px;
+}
+
+.heroTitle {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(1.1rem, 2.8vw, 2.2rem);
+  color: #ffffff;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.heroSub {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 1.5rem;
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+/* ── Stats strip ─────────────────────────────────────────────────────────── */
+.statsStrip {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statValue {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.3px;
+}
+
+.statDivider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.grid {
+  padding: 0 15% clamp(4rem, 8vw, 7rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Demo card ───────────────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: rgba(249, 115, 22, 0.35);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(249, 115, 22, 0.08);
+  transform: translateY(-4px);
+}
+
+/* ── Thumbnail ───────────────────────────────────────────────────────────── */
+.thumbWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease, opacity 0.2s;
+  opacity: 0.85;
+}
+
+.card:hover .thumb {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.thumbOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(9, 9, 15, 0.6) 100%
+  );
+}
+
+/* ── Body ────────────────────────────────────────────────────────────────── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* ── Badges ──────────────────────────────────────────────────────────────── */
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.badgeAi {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: #f97316;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.badgeFree {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  color: #34d399;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.badgeLimit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ── Card title + description ────────────────────────────────────────────── */
+.cardTitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  margin: 0;
+  transition: color 0.15s;
+}
+
+.card:hover .cardTitle {
+  color: #fff;
+}
+
+.cardDesc {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.65;
+  margin-top: 0.75rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── CTA ─────────────────────────────────────────────────────────────────── */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f97316;
+  color: #fff;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.cardCta:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.cardProjectLink {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.cardProjectLink:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .grid {
+    padding-left: 6%;
+    padding-right: 6%;
+    grid-template-columns: 1fr;
+  }
+
+  .statsStrip {
+    gap: 1.25rem;
+  }
+}
